@@ -1,0 +1,194 @@
+/* ===== Base ===== */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:Tahoma, Verdana, system-ui, -apple-system, Segoe UI, sans-serif}
+.xp-cursor{cursor:default}
+
+/* ===== Farben nah am XP/Paul ===== */
+:root{
+  --deep:#012f9e;
+
+  /* Hintergrund-Rampe */
+  --bg1:#1868ce;   /* 0%  */
+  --bg2:#0e60cb;   /* 12% */
+  --bg3:#1164cf;   /* 32% */
+  --bg4:#1667cf;   /* 33% */
+  --bg5:#1e70d9;   /* 54% */
+  --bg6:#2b7ae1;   /* 65% */
+  --bg7:#3583e4;   /* 77% */
+  --bg8:#3c86e6;   /* 90–100% */
+
+  /* Footer */
+  --footer-green:#13920d;
+
+  /* Classic-Login rechte Seite */
+  --classic-card: rgba(255,255,255,.09);
+  --classic-row-top: rgba(255,255,255,.16);
+  --classic-row-bot: rgba(255,255,255,.04);
+  --classic-stroke: rgba(255,255,255,.80);
+  --classic-stroke-inner: rgba(0,0,0,.18);
+}
+
+/* ===== Bootscreen (Balken jetzt quadratisch) ===== */
+.boot{position:fixed;inset:0;display:grid;place-items:center;background:#000;color:#fff;z-index:9999}
+.boot-inner{width:min(980px,92vw);text-align:center;position:relative}
+.boot-logo-img{width:min(560px,90vw);height:auto;display:block;margin:0 auto}
+
+/* Rahmen eckig, Füllbalken eckig */
+.boot-bar{
+  width:min(520px,80vw);height:24px;margin:36px auto 0;
+  border:2px solid rgba(255,255,255,.55);
+  border-radius:4px;            /* << quadratisch */
+  position:relative;overflow:hidden;
+  background:rgba(255,255,255,.06);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.45);
+}
+.boot-bar-fill{
+  position:absolute;top:4px;bottom:4px;width:70px;
+  border-radius:4px;            /* << quadratisch */
+  background:linear-gradient(#6d85f7,#3d5fe8);
+  border:1px solid rgba(0,0,0,.45);
+  animation:scan 2.2s linear infinite;
+}
+.boot-bar-fill:nth-child(2){animation-delay:.28s}
+.boot-bar-fill:nth-child(3){animation-delay:.56s}
+@keyframes scan{0%{left:-90px}100%{left:calc(100% + 10px)}}
+
+.boot-note,.boot-brand{position:absolute;bottom:-56px;color:#ddd;font-size:14px}
+.boot-note{left:0}
+.boot-brand{right:0}
+.boot.fade-out{animation:bootfade .9s ease forwards}
+@keyframes bootfade{to{opacity:0;visibility:hidden}}
+
+/* ===== Header / Footer ===== */
+.xp-header-top{
+  height:120px;
+/*   background:linear-gradient(180deg,var(--deep) 0%,#0a3aa3 45%,#0a38a0 100%);
+  border-bottom:1px solid rgba(255,255,255,.25); */
+
+  background-color: #012f9e;
+  border-bottom: 2px solid #FEFEFE;
+}
+
+.xp-footer{
+  min-height:120px;border-top:2px solid var(--footer-green);
+/*   background:linear-gradient(180deg,#1f2f86 0%,#3165c4 3%,#3682e5 6%,#4490e6 10%,#386fe0 15%,#256fe2 20%,#2358d5 38%,#255ddd 54%,#2562e1 86%,#235cdf 92%,#1d4ec0 98%);
+ */  
+ background-color: #012f9e;
+ color:#fff;
+ border-top: 2px solid #13920D;
+
+}
+.xp-footer-inner{max-width:1200px;margin:0 auto;padding:clamp(14px,3vw,24px);display:grid;gap:20px;align-items:center}
+/* .xp-lang-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.35);color:#fff}
+ */.xp-flag-img{width:22px}
+.xp-footer-text{max-width:60ch;text-shadow:rgba(0,0,0,.5) 1px 1px}
+
+/* ===== Classic Login ===== */
+.xp-classic-wrap{
+  min-height:calc(100svh - 64px - 140px);
+  display:grid;place-items:center;
+  background: #567dda
+}
+.shimmer{
+        background: radial-gradient(29.68% 27.76% at 5.94% 14.64%, rgba(255, 255, 255, .2) 0%, rgba(255, 255, 255, .16) 59.9%, rgba(255, 255, 255, 0) 100%), #567DDA;
+}
+
+.xp-classic-grid{
+  width:min(1200px,94vw);
+  display:grid;grid-template-columns:1fr 1px 1fr;
+  align-items:center;gap: clamp(28px,4vw,56px);
+}
+
+/* linke Seite */
+.classic-left{justify-self:start}
+.xp-logo-left{width:clamp(260px,28vw,420px);height:auto;display:block;margin:0 0 12px}
+.classic-sub{color:#fff;font-weight:600;text-shadow:rgba(0,0,0,.55) 1px 1px}
+
+/* Divider */
+.classic-divider{
+  width:1px;height:70%;
+  background:linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,.10));
+  justify-self:center;
+}
+
+/* rechte Seite */
+.classic-users{
+  justify-self:stretch;
+  display:grid;gap:18px;
+}
+
+/* einzelne User (kleines Icon + Name) */
+.classic-user{
+  display:grid;
+  grid-template-columns:56px 1fr;
+  align-items:center;
+  gap:30px;
+padding:14px 16px;
+
+ border-radius:14px;
+  color:#fff;
+  text-decoration:none;
+  border:1px solid rgba(255, 255, 255, 0);
+
+/*   background:linear-gradient(180deg, var(--classic-row-top) 0%, var(--classic-row-bot) 100%);
+  border:1px solid rgba(255,255,255,.35);
+  box-shadow: inset 0 1px rgba(255,255,255,.40), inset 0 -1px rgba(0,0,0,.35); */
+}
+.classic-user:hover{
+  border:1px solid rgba(255,255,255,.35);
+  box-shadow: inset 0 1px rgba(255,255,255,.40), inset 0 -1px rgba(0,0,0,.35);}
+
+/* Icon-Kästchen wie XP (gelbe Kontur) */
+.classic-icon{
+/*   width:75px;
+  height:75px;
+  border-radius:10px;
+  padding-right: 10px;
+  border:2px solid #FFCC00;box-shadow:0 0 0 1px rgba(0,0,0,.25);
+  background:#2c65c9; */
+width:75px;
+  height:75px;
+  border-radius: 10px;
+  border: 3px solid #FFCC00;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .25);
+  overflow: hidden; /* wichtig, damit nichts übersteht */
+  background: none; /* bisheriges Blau entfernen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.classic-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* füllt den Rahmen ohne Verzerrung */
+  object-position: center;
+  display: block;
+}
+
+.classic-name {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 2; /* leicht enger */
+  display: flex;
+  flex-direction: column; /* Name über Beruf */
+}
+
+.beruf {
+  font-weight: 300;
+  font-size: 16px;
+  margin-top: 2px;    /* Abstand verkleinert */
+  line-height: 1.0;
+}
+/* responsive */
+@media (max-width:960px){
+  .xp-footer-inner{grid-template-columns:1fr}
+  .xp-classic-grid{grid-template-columns:1fr;gap:20px}
+  .classic-divider{display:none}
+  .classic-left{justify-self:center;text-align:center}
+  .classic-users{justify-self:center;width:min(680px,100%)}
+}
+
+
+

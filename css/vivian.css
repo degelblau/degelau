@@ -1,0 +1,2684 @@
+:root {
+  --xp-blue-dark: #003399;
+  --xp-blue-light: #6487DC;
+  --xp-taskbar-blue: linear-gradient(rgb(31, 47, 134) 0px, rgb(49, 101, 196) 3%, rgb(54, 130, 229) 6%, rgb(68, 144, 230) 10%, rgb(56, 131, 229) 12%, rgb(43, 113, 224) 15%, rgb(38, 99, 218) 18%, rgb(35, 91, 214) 20%, rgb(34, 88, 213) 23%, rgb(33, 87, 214) 38%, rgb(36, 93, 219) 54%, rgb(37, 98, 223) 86%, rgb(36, 95, 220) 89%, rgb(33, 88, 212) 92%, rgb(29, 78, 192) 95%, rgb(25, 65, 165) 98%);
+  --xp-taskbar-border-top: #52A3F5;
+  --xp-window-header-top: #0A53D1;
+  --xp-window-header-bottom: #3C8DF6;
+  --xp-window-bg: #ECE9D8;
+  --xp-font: Tahoma, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body.xp-desktop {
+  font-family: var(--xp-font);
+  font-size: 13px;
+  color: #000;
+  overflow: hidden;
+}
+
+/* Wallpaper */
+.xp-wallpaper {
+  position: fixed;
+  inset: 0;
+  background: url("../img/background.jpg") center center / cover no-repeat,
+              linear-gradient(#5cb0ff, #3c7f2b); /* Fallback */
+  z-index: 0;
+}
+
+::selection {
+  background: #003399;
+  color: #fff;
+}
+
+/* ===== MOBILE TAP OVERLAY – BSOD LOOK ===== */
+
+.oh-no {
+  font-size: 50px !important;
+  font-weight: bold;
+  margin-bottom: 20px;  
+}
+
+.mobile-tap-overlay {
+  position: fixed;
+  inset: 0;
+  background: #0000aa;           /* klassisches BSOD-Blau */
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  color: #ffffff;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 16px;
+  line-height: 1.4;
+  z-index: 9999;
+}
+
+.mobile-tap-overlay[aria-hidden="true"] {
+  display: none;
+}
+
+/* Container für den Text */
+.bsod {
+  width: 90%;
+  max-width: 720px;
+  margin-top: 60px;
+}
+
+/* Graues "Windows"-Label */
+.bsod-title {
+  display: inline-block;
+  margin: 0 0 40px 0;
+  padding: 4px 28px;
+  background: #dcdcdc;
+  color: #0000aa;
+  font-weight: bold;
+}
+
+/* Fließtext wie beim echten BSOD */
+.bsod-text {
+  white-space: pre-line;   /* Zeilenumbrüche aus dem HTML übernehmen */
+}
+
+/* "Press any key..." Zeile */
+.bsod-press {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.bsod-hint {
+  font-size: 13px;
+}
+
+/* Unsichtbarer Fullscreen-Button → gesamtes Overlay klickbar */
+#mobileTapButton {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+
+/* BSOD blinking cursor */
+.bsod-cursor {
+  display: inline-block;
+  animation: blink-cursor 1s steps(2, start) infinite;
+}
+
+@keyframes blink-cursor {
+  0%   { opacity: 1; }
+  49%  { opacity: 1; }
+  50%  { opacity: 0; }
+  99%  { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+
+/* Desktop Icons */
+.xp-icons {
+  position: relative;
+  z-index: 1;
+  padding: 12px 0 60px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.xp-icon {
+  background: transparent;
+  border: none;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.8);
+  font-size: 14px;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px 5px;
+}
+
+.xp-icon:hover {
+  background: rgba(11, 128, 216, 0.281);
+  border-radius: 6px;
+}
+
+.xp-icon-image {
+  width: 45px;
+  height: 45px;
+  
+  margin-bottom: 7px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Platzhalter-Icons – ersetzbar durch eigene PNGs */
+/* Desktop-Icons */
+.xp-icon-projects {
+  background-image: url("../img/icons/shell32.dll_14_20-6.png"); /* Ordner */
+}
+
+.xp-icon-cv {
+  background-image: url("../img/icons/pdf.png");  /* Dokument / CV */
+}
+
+.xp-icon-contact {
+  background-image: url("../img/icons/mail.png");    /* Mail-Icon (Outlook Express) */
+}
+
+.xp-icon-notes {
+  background-image: url("../img/icons/NOTEPAD.EXE_14_2-6.png");    /* Notepad */
+}
+
+
+
+/* Startmenü Icons */
+.xp-ico-projects  { background-image: url("../img/icons/shell32.dll_14_20-6.png"); }
+.xp-ico-contact   { background-image: url("../img/icons/mail.png"); }
+.xp-ico-notes     { background-image: url("../img/icons/notepad.exe_14_100-8.png"); }
+
+.xp-ico-music     { background-image: url("../img/icons/shell32.dll_14_237-8.png"); }
+.xp-ico-folder    { background-image: url("../img/icons/explorer.exe_14_103-6.png"); }
+.xp-ico-pictures  { background-image: url("../img/icons/cabview.dll_14_105-5.png"); }
+.xp-ico-calendar  { background-image: url("../img/icons/kalender.png"); }
+.xp-ico-mines     { background-image: url("../img/icons/dfrgres.dll_14_106-5.png"); }
+.xp-ico-notepad   { background-image: url("../img/icons/notepad.exe_14_100-8.png"); }
+
+.xp-all-programs-icon.xp-ico-projects  { background-image: url("../img/icons/shell32.dll_14_20-6.png"); }
+.xp-all-programs-icon.xp-ico-folder    { background-image: url("../img/icons/explorer.exe_14_103-6.png"); }
+.xp-all-programs-icon.xp-ico-notes     { background-image: url("../img/icons/NOTEPAD.EXE_14_2-6.png"); }
+
+.xp-ico-recent {
+  background-image: url("../img/icons/explorer.exe_14_100-8.png"); /* oder anderes PNG */
+}
+
+.xp-icon-label {
+  text-align: center;
+}
+
+/* Windows */
+.xp-window {
+  position: absolute;
+  top: 120px;
+  left: 220px;
+  width: 500px;
+  min-width: 260px;
+  min-height: 180px;
+  background: var(--xp-window-bg);
+  border: 1px solid #003399;
+  box-shadow: 2px 2px 6px rgba(0,0,0,.6);
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.xp-window[aria-hidden="true"] {
+  display: none;
+}
+
+/* Header */
+.xp-window-header {
+  height: 26px;
+  background: /* linear-gradient(to bottom,
+              var(--xp-window-header-top),
+              var(--xp-window-header-bottom))  var(--xp-taskbar-blue);*/
+              linear-gradient(180deg, #0997ff, #0053ee 8%, #0050ee 40%, #06f 88%, #06f 93%, #005bff 95%, #003dd7 96%, #003dd7);
+  color: #fff;
+  display: flex;
+  align-items: center;
+/*   justify-content: space-between;
+ */  padding: 0 4px;
+  cursor: move;
+}
+
+
+
+
+.xp-window-title {
+  font-weight: bold;
+  font-size: 12px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.7);
+  user-select: none;
+}
+
+.xp-window-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+/* Buttons oben rechts – einfache Quadrate */
+.xp-window-buttons button {
+  width: 18px;
+  height: 18px;
+
+  padding: 0;
+  cursor: pointer;
+}
+
+/* kleine Pixel-Icons nachbauen */
+.btn-min::before,
+.btn-max::before,
+.btn-close::before {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  background: #000;
+}
+
+.btn-min::before {
+  width: 10px;
+  height: 2px;
+  margin-top: 10px;
+}
+
+.btn-max::before {
+  width: 10px;
+  height: 8px;
+  margin-top: 3px;
+  border: 1px solid #000;
+  background: transparent;
+}
+
+.btn-close::before {
+  width: 8px;
+  height: 8px;
+  margin-top: 4px;
+  transform: rotate(45deg);
+  box-shadow:
+    0 0 0 1px #000;
+  background: transparent;
+}
+
+/* Body */
+.xp-window-body {
+  padding: 10px;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.xp-window-body-scroll {
+  overflow: auto;
+}
+
+.xp-window-body h1 {
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+
+.xp-list {
+  padding-left: 18px;
+}
+
+/* Resize Handle */
+.xp-window-resize {
+    width: 15px;
+    height: 15px;
+    align-self: flex-end;
+    margin: -15px 1px 1px 1px;
+    background: linear-gradient(135deg, transparent 0, transparent 50%, #808080 50%, #808080 100%);
+    cursor: nwse-resize;
+}
+
+/* Notepad Bereich */
+.xp-notes-area {
+  width: 100%;
+  min-height: 150px;
+  border: 1px solid #7F9DB9;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+}
+
+/* Form */
+.xp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.xp-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+}
+
+.xp-form input,
+.xp-form textarea {
+  margin-top: 2px;
+  padding: 4px;
+  border: 1px solid #7F9DB9;
+  font-family: var(--xp-font);
+  font-size: 12px;
+}
+
+.xp-btn-primary {
+  align-self: flex-start;
+  padding: 3px 10px;
+  border-radius: 2px;
+  border: 1px solid #3B619C;
+  background: linear-gradient(#FCFCFD, #DADCE3);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Taskbar */
+.xp-taskbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 32px;
+  background: var(--xp-taskbar-blue);
+  display: flex;
+  align-items: center;
+  padding: 2px 4px;
+  gap: 4px;
+  z-index: 1000;
+}
+
+/* Start Button */
+.xp-start-btn {
+/*   display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 10px 3px;
+  border-radius: 4px;
+  border: 1px solid #1E5F0F;
+  background: linear-gradient(#3CB038, #0C7A0C);
+  color: #fff;
+  font-weight: bold;
+  font-size: 13px;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.6);
+  cursor: pointer; */
+ 
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: -10px;
+    padding: 6px 12px 6px;
+    /* border-radius: 4px; */
+    border: 0px solid #1E5F0F;
+    /* background: linear-gradient(#3CB038, #0C7A0C); */
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    /* text-shadow: 1px 1px 1px rgba(0, 0, 0, .6); */
+    cursor: pointer;
+    border-radius: 0% 10px 10px 0% / 0% 25px 25px 0%;
+    background: linear-gradient(180deg, #509d4f 0%, #499e47 69.2%, #48b347 100%), linear-gradient(180deg, #509d4f 0%, #499e47 69.2%, #48b347 100%);
+    box-shadow: 1px 1px 1px #196045 inset, 2px 0 3px #00000040 inset, 0 -4px 4px #00000040 inset, -4px 0 6px #00000040 inset, 2px 4px 4px #ffffff78 inset, 0 0 #ffffff40 inset, 4px 0 4px #00000040 inset;
+}
+
+
+.xp-start-logo {
+  width: 20px;
+  height: 20px;
+  background: url("../img/start.png") center/contain no-repeat;
+}
+
+/* Taskbar Buttons (geöffnete Fenster) */
+.xp-task-buttons {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+  overflow-x: auto;
+}
+
+.xp-task-button {
+  min-width: 120px;
+  padding: 2px 6px;
+  border: 1px solid #1A3D91;
+  background: /* linear-gradient(#4C6CD3, #2442A5) */ rgb(60 125 243);
+  color: #fff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.xp-task-button.active {
+--tw-bg-opacity: 1;
+    background-color: rgb(30 82 183);
+}
+
+
+
+/* === XP Taskbar Pellets ===================================== */
+
+/* Taskbar-Container wie bisher */
+.xp-task-buttons {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+}
+
+/* Inaktiver Pellet (Fenster offen, aber nicht im Fokus) */
+.xp-task-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 10px;
+  min-width: 120px;
+  height: 24px;
+  border-radius: 3px;
+  border: none;
+  background-color: rgb(60 125 243) !important; /* bg-pellet-blue-deactivated */
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+
+  /* shadow-pellet-footer-deactivated */
+  box-shadow:
+    inset -1px 0px 1px rgba(0, 0, 0, .3),
+    inset 1px 1px 1px rgba(255, 255, 255, .2);
+}
+
+/* Hover-Brightness wie im Original */
+.xp-task-button:hover {
+  filter: brightness(1.1);
+}
+
+/* Aktiver Pellet (Fenster im Vordergrund) */
+.xp-task-button.active, .xp-task-button:active {
+  background-color: rgb(30, 82, 183); /* bg-pellet-blue-active */ 
+  box-shadow:
+    inset 0px 0px 1px 1px rgba(0, 0, 0, .2),
+    inset 1px 0px 1px rgba(0, 0, 0, .7); /* shadow-pellet-footer-active */
+  color: #fff;
+}
+
+
+/* Tray */
+.xp-tray {
+    margin-left: auto;
+    height: 32px !important;
+    margin-right: -4px;
+    /* margin-top: -4px; */
+    display: flex;
+    padding: 7px 14px 7px 14px;
+    height: 100%;
+    font-size: 12px;
+    background: linear-gradient(rgb(12, 89, 185) 1%, rgb(19, 158, 233) 6%, rgb(24, 181, 242) 10%, rgb(19, 155, 235) 14%, rgb(18, 144, 232) 19%, rgb(13, 141, 234) 63%, rgb(13, 159, 241) 81%, rgb(15, 158, 237) 88%, rgb(17, 155, 233) 91%, rgb(19, 146, 226) 94%, rgb(19, 126, 215) 97%, rgb(9, 91, 201) 100%);
+    box-shadow: #18bbff 1px 0 1px inset;
+}
+
+.xp-tray-flag {
+  width: auto;
+  height: 16px;
+  margin-right: 6px;
+  margin-left: 6px;
+}
+.xp-tray-flag:hover{
+  filter: brightness(1.15);
+}
+
+.xp-tray-clock {
+  min-width: 36px;
+  text-align: right;
+  color: #fff;
+}
+
+.xp-tray-fullscreen {
+  background: transparent;
+  border: none;
+  padding: 0 6px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.xp-tray-fullscreen img {
+  width: auto;
+  height: 32px;
+  display: block;
+}
+
+.xp-tray-fullscreen:hover {
+  filter: brightness(1.15);
+}
+
+/* Responsive Minimal */
+@media (max-width: 768px) {
+  .xp-window {
+    width: 90vw;
+    left: 5vw;
+    top: 60px;
+  }
+
+  .xp-icons {
+    padding-left: 6px;
+  }
+}
+
+
+
+/* =========================
+   START MENU
+   ========================= */
+
+.xp-start-menu {
+  position: fixed;
+  left: 2px;
+  bottom: 32px; /* direkt oberhalb der Taskleiste */
+  width: 320px;
+  max-height: calc(100vh - 60px);
+  z-index: 5;
+  font-size: 12px;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.xp-start-menu[aria-hidden="true"] {
+  display: none;
+}
+
+.xp-start-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 6px 6px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px #003399, 3px 3px 8px rgba(0,0,0,.7);
+  position: relative;
+}
+
+/* Header oben */
+.xp-start-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: linear-gradient(#1B5FD3, #1540A4);
+  color: #fff;
+}
+
+.xp-start-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  border: 2px solid #FFCC00;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.35);
+  overflow: hidden;
+  background: #2C65C9;
+  flex-shrink: 0;
+}
+
+.xp-start-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.xp-start-username {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+/* Spaltenbereich */
+.xp-start-columns {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  background: #F0F0F0;
+}
+
+.xp-start-col {
+  padding: 8px 6px;
+}
+
+.xp-start-col-main {
+  background: #FFFFFF;
+  border-right: 1px solid #C0D4F2;
+}
+
+/* Items */
+.xp-start-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 4px 4px;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: left;
+  color: #000;
+}
+
+.xp-start-item + .xp-start-item {
+  margin-top: 2px;
+}
+
+.xp-start-item:hover {
+  background: #316AC5;
+  color: #fff;
+}
+
+.xp-start-item:hover .xp-start-item-sub {
+  color: #E7F1FF;
+}
+
+.xp-start-item-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 6px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+}
+
+.xp-start-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.xp-start-item-sub {
+  font-size: 11px;
+  color: #555;
+}
+
+/* kleine Einträge rechts */
+.xp-start-item-small .xp-start-item-text strong {
+  font-size: 12px;
+}
+
+/* Icons im Startmenü - Platzhalter */
+/* Startmenü – linke Spalte */
+.xp-ico-projects {
+  background-image: url("../img/icons/shell32.dll_14_20-6.png"); /* Ordner */
+}
+
+
+
+.xp-ico-cv {
+  background-image: url("../img/icons/pdf.png");  /* CV-Dokument */
+}
+
+.xp-ico-notes {
+  background-image: url("../img/icons/NOTEPAD.EXE_14_2-6.png");    /* Notepad */
+}
+
+/* Startmenü – rechte Spalte */
+.xp-ico-music {
+  background-image: url("../img/icons/shell32.dll_14_237-8.png"); /* Lautsprecher/Musik */
+}
+
+.xp-ico-folder {
+  background-image: url("../img/icons/explorer.exe_14_100-8.png"); /* Ordner/My Documents */
+}
+
+.xp-ico-pictures {
+  background-image: url("../img/icons/shimgvw.dll_14_4-5.png");    /* Bildbetrachter */
+}
+
+.xp-ico-calendar {
+  background-image: url("../img/icons/kalender.png");   /* Aufgaben/„Kalender“-Feeling */
+}
+
+.xp-ico-mines {
+  background-image: url("../img/icons/winmine.exe_14_100-5.png");  /* Minesweeper */
+}
+
+.xp-ico-notepad {
+  background-image: url("../img/icons/NOTEPAD.EXE_14_2-6.png");    /* Notepad */
+}
+
+
+/* ausgewählter Eintrag im Startmenü */
+.xp-start-item.selected,
+.xp-start-item:hover {
+  background: #316AC5;
+  color: #fff;
+}
+
+.xp-start-item.selected .xp-start-item-sub,
+.xp-start-item:hover .xp-start-item-sub {
+  color: #E7F1FF;
+}
+
+
+
+/* Footer unten */
+.xp-start-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 6px 8px;
+  
+  
+}
+
+.xp-start-footer-btn {
+  padding: 2px 8px;
+  font-size: 11px;
+  border-radius: 3px;
+  border: 1px solid rgba(0,0,0,.4);
+  background: linear-gradient(#FEFEFE, #ECE6D8);
+  cursor: pointer;
+}
+
+/* Startbutton aktiv, wenn Menü offen 
+.xp-start-btn.active {
+  box-shadow: inset 0 0 0 1px #FFF, inset 1px 1px 1px rgba(255,255,255,.6);
+  background: linear-gradient(#49B248, #1A7F1A);
+}*/
+
+
+/* =========================
+   CONTACT / MAIL WINDOW
+   ========================= */
+
+/* =========================
+   CONTACT / MAIL WINDOW
+   ========================= */
+
+.xp-mail-window {
+  padding: 0;
+  background: #ece9d8;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Menüleiste oben (Datei / Bearbeiten ...) */
+.xp-mail-menubar {
+  display: flex;
+  gap: 16px;
+  padding: 3px 10px 4px;
+  background: #e7dfcf;
+  border-bottom: 1px solid #c4bcad;
+  font-size: 12px;
+}
+
+.xp-mail-menubar span {
+  cursor: default;
+}
+/* ==== MAIL TOOLBAR – XP-Look ==== */
+
+.xp-mail-toolbar {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  padding: 4px 0px 0px;
+  background: #f4eee1;              /* leicht beige */
+  border-bottom: 1px solid #c4bcad;
+  overflow-x: auto;                  /* bei schmalem Fenster scrollen */
+}
+
+.xp-mail-toolbar::-webkit-scrollbar {
+  height: 8px;
+}
+
+/* Button: Icon oben, Text unten */
+.xp-mail-tool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 0 0 auto;                    /* Breite nicht quetschen, aber scrollbar machen */
+  padding: 2px 10px 3px;
+  border: 1px solid transparent;
+  border-right-color: #d9d2c4;
+  background: transparent;           /* kein Verlauf */
+  font-size: 11px;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.xp-mail-tool:first-child {
+  border-left-color: transparent;
+}
+
+.xp-mail-tool:hover {
+  background: #e9e3d8;
+  border-color: #d3ccbe;
+}
+
+.xp-mail-tool:active {
+  background: #d9d1c3;
+  border-top-color: #b8b09f;
+  border-left-color: #b8b09f;
+  border-right-color: #fdfaf4;
+  border-bottom-color: #fdfaf4;
+}
+
+/* kleines Icon oben */
+.xp-mail-tool-icon {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 2px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Platzhalterfarben – später durch echte Icons ersetzen */
+.xp-mail-icon-send     { background-image: url("../img/icons/mail.png"); }
+.xp-mail-icon-cut      { background-image: url("../img/icons/cut.png"); }
+.xp-mail-icon-copy     { background-image: url("../img/icons/copy.png"); }
+.xp-mail-icon-paste    { background-image: url("../img/icons/paste.png")}
+.xp-mail-icon-undo     { background-image: url("../img/icons/undo.png"); }
+.xp-mail-icon-redo    { background-image: url("../img/icons/redo.png");}
+.xp-mail-icon-attach   { background-color: #8b4513; }
+.xp-mail-icon-priority { background-color: #ff8c00; }
+.xp-mail-icon-sign     { background-color: #4b0082; }
+
+.xp-mail-tool-label {
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* Formularlayout */
+.xp-mail-form {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+/* Kopfzeilen (An / Von / Betreff) */
+.xp-mail-headers {
+  padding: 8px 10px 6px;
+  border-top: 1px solid #d4cec0;
+  border-bottom: 1px solid #d4cec0;
+  background: #f7f3ea;
+}
+
+.xp-mail-row {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  align-items: center;
+  margin-bottom: 4px;
+  column-gap: 4px;
+}
+
+.xp-mail-row:last-child {
+  margin-bottom: 0;
+}
+
+.xp-mail-label {
+  font-size: 12px;
+}
+
+.xp-mail-input {
+  height: 22px;
+  padding: 2px 4px;
+  border: 1px solid #7f9db9;
+  background: #ffffff;
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+/* "An:" Feld: fest, aber optisch normales Input */
+.xp-mail-input-fixed[readonly] {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* Nachricht */
+.xp-mail-message {
+  flex: 1 1 auto;
+  padding: 8px 10px;
+}
+
+.xp-mail-message textarea {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #7f9db9;
+  padding: 4px;
+  font-family: var(--xp-font, "Tahoma", sans-serif);
+  font-size: 12px;
+  resize: none;
+  box-sizing: border-box;
+}
+
+/* Footer-Hinweis */
+.xp-mail-footer-note {
+  margin: 6px 10px 8px;
+  font-size: 11px;
+  font-style: italic;
+}
+
+.xp-mail-input-fixed[readonly] {
+  background: #ffffff;
+  color: #747474;
+}
+
+
+
+/* =========================
+   MY PROJECTS – EXPLORER
+   ========================= */
+
+/* Gesamtlayout des Fensters */
+.xp-explorer {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+}
+
+/* Toolbar oben */
+.xp-explorer-toolbar {
+  grid-column: 1 / 3;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: auto auto auto auto 1fr auto;
+  align-items: center;
+  column-gap: 4px;
+  padding: 4px 6px;
+  background: #e3dfcf;
+  border-bottom: 1px solid #b8b39c;
+}
+
+.xp-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 6px;
+  border: 1px solid #b5b1a0;
+  background: #f5f3ea;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.xp-nav-icon {
+  width: 16px;
+  height: 16px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.xp-nav-icon-back   { background-image: url("../img/back.png"); }
+.xp-nav-icon-search { background-image: url("../img/icons/explorer.exe_14_101-6.png"); }
+.xp-nav-icon-files  { background-image: url("../img/icons/explorer.exe_14_103-6.png"); }
+
+.xp-address-label {
+  font-size: 11px;
+  margin-left: 6px;
+}
+
+.xp-address-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #7f9db9;
+  background: #fff;
+  padding: 1px 2px;
+}
+
+.xp-address-folder-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  background: url("../img/icons/explorer.exe_14_252-3.png") center/contain no-repeat;
+}
+
+.xp-address-bar input {
+  border: none;
+  outline: none;
+  font-size: 11px;
+  width: 100%;
+}
+
+.xp-go-btn {
+  border: 1px solid #7f9db9;
+  background: #f5f3ea;
+  padding: 2px 4px;
+  cursor: pointer;
+}
+
+.xp-go-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: url("../img/icons/comctl32.dll_14_20482-6.png") center/contain no-repeat;
+}
+
+/* Sidebar links */
+
+.xp-explorer-sidebar {
+  grid-column: 1;
+  grid-row: 2;
+  background: linear-gradient(#6C8EE5, #2641A4);
+  padding: 10px;
+  color: #fff;
+  font-size: 12px;
+  border-right: 1px solid #1E2F75;
+}
+
+.xp-explorer-group + .xp-explorer-group {
+  margin-top: 12px;
+}
+
+.xp-explorer-title {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: bold;
+  background: rgba(0,0,0,.15);
+  padding: 3px 6px;
+  border-radius: 3px;
+}
+
+.xp-explorer-link {
+  display: block;
+  margin: 3px 0;
+  font-size: 12px;
+  color: #E7F1FF;
+  text-decoration: none;
+  position: relative;
+  padding-left: 20px;
+}
+
+.xp-explorer-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: url("../img/icons/explorer.exe_14_252-3.png") center/contain no-repeat;
+}
+
+.xp-explorer-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.xp-explorer-link-github::before {
+  background-image: url("../img/icons/console.dll_14_1-5.png");
+}
+
+/* rechter Bereich */
+
+.xp-explorer-main {
+  grid-column: 2;
+  grid-row: 2;
+  background: #ffffff;
+  padding: 10px 16px 16px;
+  overflow: auto;
+}
+
+/* Projektübersicht */
+
+.xp-projects-overview {
+  padding: 4px 0 10px;
+}
+
+.xp-explorer-heading {
+  font-size: 14px;
+  margin: 4px 0 6px;
+  font-weight: bold;
+}
+
+/* Hier passiert die Magie: Ordner nebeneinander */
+
+.xp-projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 6px;
+  margin-bottom: 18px;
+  align-items: flex-start;
+}
+
+.xp-project-folder {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 110px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #000;
+  padding: 0;
+}
+
+.xp-project-folder-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 4px;
+  background: url("../img/icons/explorer.exe_14_252-3.png") center/contain no-repeat;
+}
+
+.xp-project-folder-label {
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Detailansichten */
+
+.xp-project-detail[hidden] {
+  display: none;
+}
+
+.xp-project-detail {
+  max-width: 720px;
+}
+
+.xp-project-detail-head h1 {
+  font-size: 18px;
+  margin: 0 0 4px;
+}
+
+.xp-project-meta {
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: #444;
+}
+
+.xp-project-text {
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.xp-project-points {
+  font-size: 13px;
+  margin: 0 0 12px 18px;
+}
+
+.xp-project-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.xp-btn-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 3px;
+  border: 1px solid #3B619C;
+  background: linear-gradient(#FCFCFD, #DADCE3);
+  font-size: 11px;
+  text-decoration: none;
+  color: #000;
+}
+
+.xp-project-back {
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  cursor: pointer;
+  color: #0000EE;
+  text-decoration: underline;
+}
+
+
+
+
+
+/* =========================
+   MY CV – Explorer Style
+   ========================= */
+
+.xp-cv-window {
+  padding: 0;
+  background: #ffffff;
+}
+
+.xp-cv-explorer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ffffff;
+}
+
+/* Toolbar oben wiederverwenden – nur ein bisschen enger */
+.xp-cv-toolbar {
+  border-bottom: 1px solid #b8b39c;
+}
+
+/* „Seite“ im Fenster */
+.xp-cv-page {
+  flex: 1 1 auto;
+  padding: 16px 32px 24px;
+  background: #ffffff;
+  font-size: 12px;
+}
+
+/* Header mit Bild + Name + Jobtitel */
+.xp-cv-header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  column-gap: 24px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+
+/* Platzhalter-Foto links */
+.xp-cv-photo {
+  width: 110px;
+  height: 110px;
+  background: grey center/cover no-repeat;
+  border: 1px solid #000;
+}
+
+/* Name + Untertitel */
+.xp-cv-name {
+  font-size: 20px;
+  margin: 0 0 4px;
+}
+
+.xp-cv-subtitle {
+  margin: 0;
+  font-size: 13px;
+}
+
+/* Jobtitel rechts im Header */
+.xp-cv-header-role {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+/* Abschnittsüberschriften */
+.xp-cv-section {
+  margin-bottom: 18px;
+}
+
+.xp-cv-section-title {
+  font-size: 15px;
+  margin: 0 0 6px;
+  text-decoration: underline;
+}
+
+/* Zeilen / Einträge */
+.xp-cv-line {
+  margin: 0 0 6px;
+}
+
+/* Listen */
+.xp-cv-list {
+  margin: 0 0 8px 18px;
+  padding: 0;
+}
+
+/* Download-Button unten rechts */
+.xp-cv-download-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.xp-cv-download-btn {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 3px;
+  border: 1px solid #3B619C;
+  background: linear-gradient(#FCFCFD, #DADCE3);
+  font-size: 12px;
+  text-decoration: none;
+  color: #000;
+}
+
+.xp-cv-download-btn:hover {
+  background: linear-gradient(#FFFFFF, #F2F4FA);
+}
+
+/* =========================
+   XP CV TOOLBAR (PIXELGENAU)
+========================= */
+
+.xp-cv-toolbar {
+  background: #ECE9D8;
+  border-bottom: 1px solid #D3D3C4;
+  padding: 4px 6px 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Row 1 (Buttons) */
+.xp-cv-toolbar-row1 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Classic XP toolbar button */
+.xp-cv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px;
+  background: linear-gradient(#F8F7F3, #E3E1D6);
+  border: 1px solid #AFAFA4;
+  font-size: 11px;
+  cursor: pointer;
+  min-height: 24px;
+}
+
+.xp-cv-btn:active {
+  background: linear-gradient(#E2E1D8, #CDCBBF);
+}
+
+/* Icons */
+.xp-cv-icon {
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.xp-cv-icon-back     { background-image: url("../img/icons/browseui.dll_14_100-4.png"); }
+.xp-cv-icon-forward  { background-image: url("../img/icons/browseui.dll_14_101-4.png"); }
+.xp-cv-icon-up       { background-image: url("../img/icons/browseui.dll_14_110-4.png"); }
+.xp-cv-icon-folder   { background-image: url("../img/icons/explorer.exe_14_101-6.png"); }
+.xp-cv-icon-search   { background-image: url("../img/icons/srchui.dll_14_100-6.png"); }
+.xp-cv-icon-files    { background-image: url("../img/icons/explorer.exe_14_103-6.png"); }
+
+/* tiny arrow on buttons */
+.xp-cv-btn-arrow {
+  width: 10px;
+  height: 10px;
+  background: url("../img/icons/comctl32.dll_14_20482-6.png") center/contain no-repeat;
+}
+
+/* Address bar row */
+.xp-cv-toolbar-row2 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 2px;
+}
+
+.xp-cv-address-label {
+  font-size: 11px;
+  margin-right: 3px;
+}
+
+/* Address box */
+.xp-cv-address-box {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  background: white;
+  border: 1px solid #7F9DB9;
+  height: 22px;
+}
+
+.xp-cv-address-box input {
+  border: none;
+  outline: none;
+  height: 100%;
+  flex: 1;
+  padding-left: 2px;
+  font-size: 11px;
+}
+
+.xp-cv-dropbtn {
+  width: 22px;
+  height: 100%;
+  border-left: 1px solid #7F9DB9;
+  background: url("../img/icons/comctl32.dll_14_20481-6.png") center/18px no-repeat;
+}
+
+.xp-cv-go-btn {
+  width: 32px;
+  height: 22px;
+  border: 1px solid #7F9DB9;
+  background: url("../img/icons/comctl32.dll_14_20482-6.png") center/contain no-repeat;
+}
+
+
+
+
+
+/* ========== START MENU BASE ========== */
+
+.xp-start-menu {
+  position: fixed;
+  left: 4px;
+  bottom: 32px;
+  width: 430px;
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  z-index: 1000;
+}
+
+.xp-start-inner {
+  position: relative;
+  border-radius: 8px 8px 0 0;
+  overflow: visible;
+  background: #fff;
+  box-shadow:
+    0 0 0 1px #003399,
+    3px 3px 8px rgba(0,0,0,0.7);
+}
+
+/* Damit Flyouts nicht abgeschnitten werden */
+.xp-start-columns,
+.xp-start-col-main,
+.xp-start-col-side {
+  overflow: visible;
+}
+
+.xp-start-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: linear-gradient(#3c7ae4, #2853b4);
+  color: #fff;
+  border-radius: 8px 8px 0 0;
+}
+
+.xp-start-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px solid #f5d36b;
+}
+
+.xp-start-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.xp-start-username {
+  font-weight: bold;
+}
+
+/* Gradient-Linie unter dem Header */
+.xp-divider {
+  height: 2px;
+  width: 100%;
+  border: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0) 0%,
+    rgb(218,136,74) 50%,
+    rgba(0,0,0,0) 100%
+  );
+  margin: 0;
+}
+
+/* Spaltenlayout */
+.xp-start-columns {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+}
+
+/* linke Spalte */
+.xp-start-col-main {
+  background: #ffffff;
+  border-right: 1px solid #d3d8ef;
+}
+
+/* rechte Spalte */
+.xp-start-col-side {
+  background: linear-gradient(#ecf3ff, #d6e5ff);
+}
+
+/* Einträge links/rechts */
+.xp-start-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.xp-start-item-small {
+  padding: 6px 8px;
+}
+
+.xp-start-item:hover {
+  background: #316ac5;
+  color: #fff;
+}
+
+.xp-start-item-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.xp-start-item-text strong {
+  color: #000;
+}
+
+.notstrong {
+  font-weight: normal;
+}
+
+/* Text bei Hover weiß */
+.xp-start-item:hover .xp-start-item-text strong,
+.xp-start-item:hover .xp-start-item-sub {
+  color: #fff;
+}
+
+.xp-start-item-sub {
+  display: block;
+  font-size: 11px;
+  color: #666;
+}
+
+
+
+/* Container für linke Liste */
+.xp-start-main-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Linie vor All Programs (nur EINE) */
+.xp-start-separator {
+  border: 0;
+  height: 1px;
+  margin: 6px 4px 2px;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0.2) 50%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+/* ========== ALL PROGRAMS BUTTON + FLYOUT ========== */
+
+.xp-all-wrapper {
+  position: relative;
+  margin-top: 2px;
+}
+
+.xp-all-programs {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  color: #000;
+}
+
+.xp-all-programs-label {
+  color: #000;
+}
+
+.xp-all-programs-arrow {
+  font-size: 18px;
+  font-weight: 800;
+  color: rgb(4,158,4);
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+}
+
+.xp-recently-used-arrow {
+    font-size: 10px;
+  font-weight: 800;
+}
+
+/* Hover-Farbe + weiße Schrift */
+.xp-all-wrapper:hover .xp-all-programs {
+  background: #316ac5;
+}
+
+.xp-all-wrapper:hover .xp-all-programs-label {
+  color: #fff;
+}
+
+/* Flyout neben All Programs */
+.xp-all-programs-panel {
+  position: absolute;
+  top: -4px;
+  left: 100%;
+  min-width: 220px;
+  background: #f4f4f4;
+  border: 1px solid #8a8a8a;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+  padding: 4px 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 1050;
+}
+
+.xp-all-wrapper:hover .xp-all-programs-panel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+/* Einträge im Flyout (All Programs & Recently used teilen sich die Klasse) */
+.xp-all-programs-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+  color: #000;
+}
+
+.xp-all-programs-item:hover {
+  background: #316ac5;
+  color: #fff;
+}
+
+.xp-all-programs-icon {
+  width: 18px;
+  height: 18px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+}
+
+/* ========== RECENTLY USED SUBMENU ========== */
+
+.xp-start-submenu-wrapper {
+  position: relative;
+}
+
+.xp-start-submenu-trigger {
+  background: transparent;
+}
+
+/* Hover wie bei All Programs */
+.xp-start-submenu-wrapper:hover .xp-start-submenu-trigger {
+  background: #316ac5;
+}
+
+.xp-start-submenu-wrapper:hover .xp-start-submenu-trigger .xp-start-item-text strong {
+  color: #fff;
+}
+
+/* Panel rechts neben Recently used */
+.xp-start-submenu-panel {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  min-width: 220px;
+  background: #f4f4f4;
+  border: 1px solid #8a8a8a;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+  padding: 4px 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 1050;
+}
+
+.xp-start-submenu-wrapper:hover .xp-start-submenu-panel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+/* ========== START FOOTER ========== */
+
+.xp-start-footer {
+  padding: 6px 10px;
+  background: linear-gradient(rgb(66,130,214) 0%, rgb(15,97,203) 88%);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+/*   border-radius: 0 0 8px 8px;
+ */}
+
+.xp-start-footer-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.5);
+  background: linear-gradient(#fefefe, #ece6d8);
+  cursor: pointer;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.7) inset;
+}
+
+.xp-start-footer-btn::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Log Off */
+.xp-start-logoff {
+  background: linear-gradient(#fff8df, #f3d77e);
+}
+.xp-start-logoff::before {
+  background-image: url("../img/icons/logout.png");
+}
+
+/* Turn Off */
+.xp-start-shutdown {
+  background: linear-gradient(#ffe4d8, #f29a63);
+}
+.xp-start-shutdown::before {
+  background-image: url("../img/icons/power.png");
+}
+
+.xp-start-footer-btn:hover {
+  filter: brightness(1.05);
+}
+
+
+/* ===========================
+   XP WINDOW BUTTONS WITH SVG
+   =========================== */
+/* === XP-Fensterbuttons: Reset + SVG-Icons === */
+
+/* Container rechts oben */
+.xp-window-buttons {
+  display: flex;
+  gap: 3px;
+}
+
+/* alles Alte überschreiben */
+.btn-min,
+.btn-max,
+.btn-close {
+  all: unset;                  /* alles zurücksetzen */
+  box-sizing: border-box;
+  display: inline-block;
+  width: 22px;
+  height: 20px;
+  cursor: pointer;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* falls irgendwo noch ::before-Content definiert war */
+.btn-min::before,
+.btn-max::before,
+.btn-close::before {
+  content: none !important;
+}
+
+/* SVGs aus deinem img-Ordner */
+.btn-min {
+  background-image: url("../img/minimize.svg") !important;
+}
+
+.btn-max {
+  background-image: url("../img/maximize.svg")!important;
+}
+
+.btn-close {
+  background-image: url("../img/close.svg")!important;
+}
+
+/* optional: leichter Hover */
+.xp-window-buttons button:hover {
+  filter: brightness(1.05);
+}
+
+.xp-window-buttons button:active {
+  filter: brightness(0.95);
+}
+
+
+
+
+
+/* =========================
+   XP-Fenster wie XP.css
+   ========================= */
+
+/* Äußere Fensterhülle */
+.xp-window {
+  position: absolute;
+/*   background: #ece9d8;
+ */  padding: 1px; /* dünner beiger Rand innen, wie bei XP */
+  box-shadow:
+    inset -1px -1px #00138c,
+    inset  1px  1px #0831d9,
+    inset -2px -2px #001ea0,
+    inset  2px  2px #166aee,
+    inset -3px -3px #003bda,
+    inset  3px  3px #0855dd;   /* blauer XP-Rahmen */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Inhalt im Fenster (alles unterhalb der Titelleiste) */
+.xp-window-body {
+  background: #ece9d8;
+  border: 1px solid #aca899;
+  border-top: none;
+  padding: 8px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+/* Titelleiste = title-bar */
+.xp-window-header {
+  font-family: "Trebuchet MS", system-ui, sans-serif;
+  font-size: 13px;
+  color: #fff;
+  text-shadow: 1px 1px #0f1089;
+
+  background: linear-gradient(
+    180deg,
+    #0997ff,
+    #0053ee 8%,
+    #0050ee 40%,
+    #0066ff 88%,
+    #0066ff 93%,
+    #005bff 95%,
+    #003dd7 96%,
+    #003dd7
+  );
+
+  padding: 3px 4px 3px 6px;
+  border-top: 1px solid #0831d9;
+  border-left: 1px solid #0831d9;
+  border-right: 1px solid #001ea0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 7px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 26px;
+  box-sizing: border-box;
+}
+
+/* Fenstertitel links */
+.xp-window-title {
+  font-weight: bold;
+  white-space: nowrap;
+  text-align: left;
+}
+
+/* Button-Gruppe rechts bündig */
+.xp-window-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+/* Die Buttons selbst – Icons hast du ja schon eingebunden */
+.xp-window-header .xp-window-buttons button {
+  all: unset;
+  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+/* Minimieren / Maximieren / Schließen – Pfade wie vorher */
+.btn-min {
+  background-image: url("../img/minimize.svg");
+}
+.btn-max {
+  background-image: url("../img/maximize.svg");
+}
+.btn-close {
+  background-image: url("../img/close.svg");
+}
+
+.xp-window-header .xp-window-buttons button:hover {
+  filter: brightness(1.06);
+}
+.xp-window-header .xp-window-buttons button:active {
+  filter: brightness(0.9);
+}
+
+
+
+
+/* Buttons: kein eigener Background, kein Rahmen, nur Text + Icon */
+.xp-start-footer-btn {
+  all: unset;                /* alles resetten, damit alte Styles weg sind */
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  font-size: 12px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* Icon links */
+.xp-start-footer-btn::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Spezifische Icons */
+.xp-start-logoff::before {
+  background-image: url("../img/icons/logout.png");
+}
+
+.xp-start-shutdown::before {
+  background-image: url("../img/icons/power.png");
+}
+
+/* Hover: ganz dezent – wie XP (leicht heller + Text-Schatten) */
+.xp-start-footer-btn:hover {
+  text-shadow: 0 0 3px rgba(0,0,0,0.6);
+}
+
+
+
+
+
+/* Basis-XP-Button (OK / Cancel etc.) 
+.xp-btn {
+  font-family: "Tahoma", system-ui, sans-serif;
+  font-size: 11px;
+  min-width: 72px;
+  padding: 3px 18px 4px;
+  border-radius: 3px;
+
+  border: 1px solid #808080;
+  color: #000;
+  background: linear-gradient(#ffffff, #e6e0d5 40%, #d7d0c2 100%);
+  box-shadow:
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #b5b2a4;
+
+  cursor: default;
+  white-space: nowrap;
+}*/
+
+/* Hover: leicht heller 
+.xp-btn:hover {
+  background: linear-gradient(#ffffff, #eee7dc 50%, #e0d7c7 100%);
+}*/
+
+/* Klick-Optik: „eingedrückt“ 
+.xp-btn:active {
+  padding: 4px 17px 3px;              
+  box-shadow:
+    inset -1px -1px 0 #ffffff,
+    inset 1px 1px 0 #b5b2a4;
+}*/
+
+/* Fokus-Rahmen wie im Screenshot (gepunktete Linie) 
+.xp-btn:focus-visible {
+  outline: 1px dotted #000;
+  outline-offset: -3px;
+}*/
+
+/* Standard-Button (blauer Rahmen – z.B. „OK“) 
+  border-color: #0a246a;
+  box-shadow:
+    0 0 0 1px #ffffff,
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #b5b2a4;
+}*/
+
+
+
+
+
+
+/* =========================
+   XP SHUTDOWN DIALOG
+   ========================= */
+
+.xp-shutdown-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 2000;
+}
+
+.xp-shutdown-overlay[aria-hidden="true"] {
+  display: none;
+}
+
+.xp-shutdown-dialog {
+  width: 460px;
+  max-width: 90vw;
+  background: #0b2f8a;
+  color: #fff;
+  font-family: Tahoma, sans-serif;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.8);
+  border: 1px solid #001b63;
+}
+
+/* Kopfzeile "Turn off computer" */
+.xp-shutdown-header {
+  padding: 10px 14px;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.xp-shutdown-logo {
+  width: 32px;
+  height: 24px;
+  background: url("../img/start.png") right center / contain no-repeat;
+}
+
+/* Körper mit den drei großen Buttons */
+.xp-shutdown-body {
+  padding: 22px 26px 26px;
+  background: #6487DC;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.xp-shutdown-option {
+  border: none;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.xp-shutdown-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 4px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Farbliche Icons, du kannst hier eigene PNGs setzen,
+   im Zweifel bleiben es einfach Farbflächen */
+.xp-shutdown-standby .xp-shutdown-icon {
+  background-image: url("../img/icons/standby.png");
+  background-color: #f7c452;
+}
+
+.xp-shutdown-turnoff .xp-shutdown-icon {
+  background-image: url("../img/icons/turnoff.png");
+  background-color: #e46b5b;
+}
+
+.xp-shutdown-restart .xp-shutdown-icon {
+  background-image: url("../img/icons/restart.png");
+  background-color: #4bb35c;
+}
+
+.xp-shutdown-label {
+  font-size: 14px;
+}
+
+.xp-shutdown-option:hover .xp-shutdown-icon {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7);
+}
+
+/* Footer mit Cancel-Button */
+.xp-shutdown-footer {
+  padding: 10px 14px 12px;
+  background: #0b2f8a;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* einfacher XP-Style-Button (kannst du für andere Buttons wiederverwenden) */
+.xp-btn {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  min-width: 72px;
+  padding: 3px 18px 4px;
+  border-radius: 3px;
+  border: 1px solid #808080;
+  color: #000;
+  background: linear-gradient(#ffffff, #e6e0d5 40%, #d7d0c2 100%);
+  box-shadow:
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #b5b2a4;
+  cursor: default;
+  white-space: nowrap;
+}
+
+.xp-btn:hover {
+  background: linear-gradient(#ffffff, #eee7dc 50%, #e0d7c7 100%);
+}
+
+.xp-btn:active {
+  padding: 4px 17px 3px;
+  box-shadow:
+    inset -1px -1px 0 #ffffff,
+    inset 1px 1px 0 #b5b2a4;
+}
+
+.xp-btn:focus-visible {
+  outline: 1px dotted #000;
+  outline-offset: -3px;
+}
+
+
+/* =========================
+   TURN OFF – SCHWARZER SCREEN
+   ========================= */
+
+.xp-black-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 3000;
+  cursor: pointer;
+}
+
+.xp-black-screen[aria-hidden="true"] {
+  display: none;
+}
+
+/* =========================
+   STAND BY – SCREENSAVER
+   ========================= */
+
+.xp-screensaver-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  cursor: pointer;
+}
+
+.xp-screensaver-overlay[aria-hidden="true"] {
+  display: none;
+}
+
+.xp-screensaver-overlay video {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+
+/* =========================
+   SHUTDOWN DIALOG + GRAU-FADE
+   ========================= */
+
+.xp-shutdown-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 2500;
+
+  /* Startzustand: unsichtbar, keine Effekte */
+  opacity: 0;
+  pointer-events: none;
+  background: transparent;
+  backdrop-filter: none;
+
+  /* weicher Übergang beim Ein und Ausblenden */
+  transition:
+    opacity 0.9s ease,
+    background 0.9s ease,
+    backdrop-filter 0.9s ease;
+}
+
+/* wenn aria-hidden="false" → Dialog sichtbar + Hintergrund grau */
+.xp-shutdown-overlay[aria-hidden="false"] {
+  opacity: 1;
+  pointer-events: auto;
+
+  /* dunkelt etwas ab */
+  background: rgba(0, 0, 0, 0.25);
+
+  /* hier passiert die Magie: Graustufen + leicht dunkler */
+  backdrop-filter: grayscale(1) brightness(0.7);
+}
+
+/* Fenster im Overlay bleibt schön knallig */
+.xp-shutdown-dialog {
+  background: #0c3f95;
+  border: 1px solid #001c5a;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  min-width: 420px;
+  border-radius: 4px;
+  color: #fff;
+}
+
+/* Rest deiner Dialog Styles (Buttons etc) bleibt wie gehabt */
+
+
+/* Basiszustand: alles bunt, aber schon mit Transition vorbereitet */
+/* Basiszustand: alles normal, ohne Graustufen */
+.xp-wallpaper,
+.xp-window,
+.xp-taskbar,
+.xp-start-menu,
+.xp-icons {
+  filter: grayscale(0) brightness(1);
+  opacity: 1;
+  transition: filter 8s ease-in, opacity 8s ease-in; /* 4 Sekunden für den XP-Fade */
+}
+
+
+
+
+
+
+
+
+/* ========= XP ERROR DIALOG ========= */
+
+.xp-error-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  z-index: 4000;
+}
+
+.xp-error-overlay[aria-hidden="true"] {
+  display: none;
+}
+
+/* Außen genauso „eingefasst“ wie ein normales XP-Fenster */
+.xp-error-modal {
+  padding: 1px;
+  background: transparent;
+  box-shadow:
+    inset -1px -1px #00138c,
+    inset  1px  1px #0831d9,
+    inset -2px -2px #001ea0,
+    inset  2px  2px #166aee,
+    inset -3px -3px #003bda,
+    inset  3px  3px #0855dd;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Inhalt im Body (beige Fläche kommt von .xp-window-body) */
+.xp-error-body {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.xp-error-text {
+  margin: 0;
+  font-size: 12px;
+}
+
+/* Icon: roter Kreis mit weißem X */
+/* XP-Error-Icon aus Datei */
+.xp-error-icon {
+  width: 34px;
+  height: 34px;
+  background-image: url("../img/icons/error.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.xp-error-icon-2 {
+  width: 34px;
+  height: 34px;
+  background-image: url("../img/icons/comctl32.dll_14_20482-6_alpha.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.xp-error-icon-3 {
+  width: 34px;
+  height: 34px;
+  background-image: url("../img/icons/napstat.exe_14_103-6_alpha.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+}
+/* Footer mit OK-Button – sitzt innerhalb der beige Fläche */
+.xp-error-footer {
+  text-align: center;
+  padding-top: 4px;
+}
+
+
+/* Shake-Animation wie XP */
+@keyframes xp-error-shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+  100% { transform: translateX(0); }
+}
+
+/* Blink-Effekt (Fenster kurz heller) */
+@keyframes xp-error-blink {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.35); }
+  100% { filter: brightness(1); }
+}
+
+/* Klasse, die das Error-Fenster wackeln lässt */
+.xp-error-modal.shake {
+  animation: xp-error-shake 0.4s ease-out,
+             xp-error-blink 0.4s ease-out;
+}
+
+
+
+
+/* XP Balloon Notification */
+.xp-balloon {
+  position: fixed;
+  bottom: 58px; /* über Taskbar */
+  right: 10px;
+  width: 270px;
+  min-height: 70px;
+  padding: 10px 25px 10px 10px;
+  background: #fffbe5;
+  border: 1px solid #d9d4a6;
+  border-radius: 8px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+  font-size: 13px;
+  font-family: Tahoma, sans-serif;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity .4s ease, transform .3s ease;
+  z-index: 99999;
+}
+
+.xp-balloon[aria-hidden="false"] {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.xp-balloon-icon img {
+  width: 22px;
+  height: 22px;
+}
+
+.xp-balloon-close {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  cursor: pointer;
+  color: #555;
+}
+.xp-balloon-close:hover {
+  color: black;
+}
+
+
+.xp-balloon {
+  position: fixed;
+  bottom: 35px;
+  right: 10px;
+  width: 270px;
+  min-height: 70px;
+  padding: 10px 25px 10px 10px;
+  background: #fffbe5;
+  border: 1px solid #d9d4a6;
+  border-radius: 8px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+  font-size: 13px;
+  font-family: Tahoma, sans-serif;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity .4s ease, transform .3s ease;
+  z-index: 99999;
+}
+
+/* kleiner Zipfel unten rechts */
+.xp-balloon::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  right: 40px;
+  width: 0;
+  height: 0;
+  border-width: 10px 10px 0 0;           /* oben rechts Dreieck */
+  border-style: solid;
+  border-color: #fffbe5 transparent transparent transparent;
+  
+  /* dünner Rand wie oben */
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+
+
+/* Paint Fenster: Body ohne extra Padding */
+.xp-paint-window-body {
+  display: flex;
+  flex-direction: column;
+  padding: 0;              /* keine Innenabstände, damit Paint randlos sitzt */
+}
+
+/* iframe füllt das Fenster */
+.xp-paint-frame {
+  flex: 1;
+  width: 100%;
+  border: none;
+}
+
+/* Footer im Paint Fenster mit Lizenz Hinweis */
+.xp-paint-footer {
+  font-family: "Lucida Console", "Lucida Sans Typewriter", monospace;
+  font-size: 8px;
+  padding: 2px 12px;
+  background: #d4d0c8;             /* klassischer Windows 9x / XP Grau Ton */
+  border-top: 1px solid #808080;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.xp-paint-footer a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Icon links im Fenster-Header */
+.xp-window-header {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  padding-left: 6px;
+}
+
+.xp-window-icon {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+}
+
+/* Taskbar Icon */
+.xp-task-button-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  image-rendering: pixelated;
+}
+
+.xp-window-header {
+  display: flex;
+  align-items: center;
+  /* falls da noch justify-content: space-between oder center steht,
+     bitte rauswerfen */
+}
+
+.xp-window-title {
+  margin-left: 6px;
+  margin-right: 0;
+  text-align: left;
+  flex: 0 0 auto; /* nimmt nur so viel Platz wie nötig */
+}
+
+.xp-window-buttons {
+  margin-left: auto;  /* schiebt die Buttons ganz nach rechts */
+  display: flex;
+  gap: 2px;
+}
+
+
+
+
+@media (max-width: 1024px) {
+
+    body.xp-desktop {
+    font-size: 12px;
+  }
+
+.xp-window {
+  width: 95vw !important;
+  height: 80vh !important;
+  top: 20px !important; 
+  left: 10px !important;
+      max-width: 96vw;
+    max-height: calc(100vh - 60px)
+}
+
+.xp-window-body-scrollable {
+  overflow: auto !important;
+   /* Höhe minus Header, Border und Padding */
+}
+
+.xp-window-header {
+  font-size: 12px !important;
+}
+.xp-window-title {
+  font-size: 12px !important;
+}
+
+  .xp-start-menu {
+    left: 0;
+    right: 0;
+    width: 100vw;
+    bottom: 34px;
+    max-height: 75vh;
+  }
+
+  /* Spalten im Startmenü untereinander, damit nichts rausfliegt */
+  .xp-start-columns {
+    flex-direction: column;
+  }
+  .xp-start-col-side {
+    border-left: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+  }
+
+  /* "Alle Programme" & "Zuletzt verwendet" Panels dürfen NICHT aus dem Bildschirm rausfliegen */
+  .xp-all-programs-panel,
+  .xp-start-submenu-panel {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    margin-top: 4px;
+  }
+
+
+
+    .xp-all-wrapper,
+  .xp-start-submenu-wrapper {
+    position: relative;
+  }
+
+  /* Panels als Overlay direkt unter dem Button */
+  .xp-all-programs-panel,
+  .xp-start-submenu-panel {
+    position: absolute;
+    top: 100%;          /* direkt unter dem Button */
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin-top: 4px;
+    transform: none;    /* kein seitliches Rausfliegen */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    z-index: 5;         /* über den anderen Einträgen */
+    background: #f4f7ff; /* oder dein Startmenü-HG */
+  }
+
+  /* Wenn du [hidden] verwendest, sicherstellen, dass es wirklich weg ist */
+  .xp-all-programs-panel[hidden],
+  .xp-start-submenu-panel[hidden] {
+    display: none !important;
+  }
+
+#paintWindow {
+  width: 100vw !important;
+  height: 80vh !important;
+  top: 20px !important; 
+  left: 10px !important;
+}
+
+
+
+
+}
+
+.xp-error-text {
+  width: 60ch;
+}
+
