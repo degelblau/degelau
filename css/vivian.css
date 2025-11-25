@@ -190,6 +190,9 @@ body.xp-desktop {
 .xp-ico-projects  { background-image: url("../img/icons/shell32.dll_14_20-6.png"); }
 .xp-ico-contact   { background-image: url("../img/icons/mail.png"); }
 .xp-ico-notes     { background-image: url("../img/icons/notepad.exe_14_100-8.png"); }
+.xp-ico-legal     { background-image: url("../img/icons/legal.png"); }
+.xp-ico-paint     { background-image: url("../img/icons/paint.png"); }
+
 
 .xp-ico-music     { background-image: url("../img/icons/shell32.dll_14_237-8.png"); }
 .xp-ico-folder    { background-image: url("../img/icons/explorer.exe_14_103-6.png"); }
@@ -197,6 +200,7 @@ body.xp-desktop {
 .xp-ico-calendar  { background-image: url("../img/icons/kalender.png"); }
 .xp-ico-mines     { background-image: url("../img/icons/dfrgres.dll_14_106-5.png"); }
 .xp-ico-notepad   { background-image: url("../img/icons/notepad.exe_14_100-8.png"); }
+
 
 .xp-all-programs-icon.xp-ico-projects  { background-image: url("../img/icons/shell32.dll_14_20-6.png"); }
 .xp-all-programs-icon.xp-ico-folder    { background-image: url("../img/icons/explorer.exe_14_103-6.png"); }
@@ -702,6 +706,10 @@ body.xp-desktop {
   font-size: 12px;
 }
 
+.legal {
+  text-decoration: none !important;
+}
+
 /* Icons im Startmenü - Platzhalter */
 /* Startmenü – linke Spalte */
 .xp-ico-projects {
@@ -804,7 +812,6 @@ body.xp-desktop {
   display: flex;
   gap: 16px;
   padding: 3px 10px 4px;
-  background: #e7dfcf;
   border-bottom: 1px solid #c4bcad;
   font-size: 12px;
 }
@@ -941,7 +948,7 @@ body.xp-desktop {
 
 .xp-mail-message textarea {
   width: 100%;
-  height: 100%;
+  height: 100px;
   border: 1px solid #7f9db9;
   padding: 4px;
   font-family: var(--xp-font, "Tahoma", sans-serif);
@@ -952,9 +959,15 @@ body.xp-desktop {
 
 /* Footer-Hinweis */
 .xp-mail-footer-note {
-  margin: 6px 10px 8px;
+  margin: 0px 10px 8px;
   font-size: 11px;
   font-style: italic;
+}
+
+.formular-hinweis {
+  font-size: 11px;
+  margin-top: 4px;
+  padding: 0px 10px;
 }
 
 .xp-mail-input-fixed[readonly] {
@@ -1569,6 +1582,45 @@ body.xp-desktop {
   font-weight: normal;
 }
 
+
+
+
+
+.xp-social-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  text-decoration: none;
+  color: #000;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* .xp-social-item:hover {
+  background: linear-gradient(#eaf2fb, #d6e5f5);
+} */
+
+.xp-social-item img {
+  width: 32px;
+  height: 32px;
+  image-rendering: crisp-edges;
+}
+
+.xp-social-item strong {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.xp-social-item span {
+  font-size: 11px;
+  color: #555;
+}
+
+
+
+
+
 /* Text bei Hover weiß */
 .xp-start-item:hover .xp-start-item-text strong,
 .xp-start-item:hover .xp-start-item-sub {
@@ -1686,12 +1738,16 @@ body.xp-desktop {
   color: #000;
 }
 
+.recently {
+color: #979797 !important;
+}
+
 .xp-all-programs-item:hover {
   background: #316ac5;
   color: #fff;
 }
 
-.xp-all-programs-icon {
+.xp-all-programs-icon  {
   width: 18px;
   height: 18px;
   background-size: contain;
@@ -1699,6 +1755,11 @@ body.xp-desktop {
   background-repeat: no-repeat;
   flex-shrink: 0;
 }
+
+.recently-icon {
+  opacity: 0.6 !important;
+}
+
 
 /* ========== RECENTLY USED SUBMENU ========== */
 
