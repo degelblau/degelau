@@ -692,16 +692,16 @@ if (logoffBtn) {
     if (soundShutdown) {
       soundShutdown.currentTime = 0;
       soundShutdown.play().catch(() => {
-        window.location.href = 'index.html';
+        window.location.href = '/vivian/';
       });
       soundShutdown.onended = () => {
-        window.location.href = 'index.html';
+        window.location.href = '/vivian/';
       };
       setTimeout(() => {
-        window.location.href = 'index.html';
+        window.location.href = '/vivian/';
       }, 6000);
     } else {
-      window.location.href = 'index.html';
+      window.location.href = '/vivian/';
     }
   });
 }
@@ -790,7 +790,7 @@ if (turnoffBtn && blackScreen) {
   });
 
   blackScreen.addEventListener('click', () => {
-    window.location.href = 'index.html';
+    window.location.href = '/vivian/';
   });
 }
 
@@ -802,18 +802,18 @@ if (restartBtn) {
     if (soundShutdown) {
       soundShutdown.currentTime = 0;
       soundShutdown.play().catch(() => {
-        window.location.href = 'index.html';
+        window.location.href = '/vivian/';
       });
 
       soundShutdown.onended = () => {
-        window.location.href = 'index.html';
+        window.location.href = '/vivian/';
       };
 
       setTimeout(() => {
-        window.location.href = 'index.html';
+        window.location.href = '/vivian/';
       }, 6000);
     } else {
-      window.location.href = 'index.html';
+      window.location.href = '/vivian/';
     }
   });
 }
@@ -924,8 +924,8 @@ if (contactForm) {
 }
 
 
-
-/* window.addEventListener('contextmenu', e => {
+/* 
+window.addEventListener('contextmenu', e => {
   e.preventDefault();
 });
 
