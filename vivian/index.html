@@ -1,0 +1,1007 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vivian – Portfolio XP Desktop</title>
+  <link rel="icon" href="/img/icons/agentsvr.exe_14_113-0_alpha.png">
+  <link rel="stylesheet" href="/css/vivian.css">
+</head>
+<body class="xp-desktop">
+
+<!-- MOBILE TAP OVERLAY – BSOD STYLE -->
+<div id="mobileTapOverlay" class="mobile-tap-overlay" aria-hidden="true">
+  <div class="bsod">
+    <h1 class="oh-no">:(</h1>
+    <div class="bsod-title">Windows</div>
+
+    <div class="bsod-text">
+      Es ist ein Fehler aufgetreten. Um fortzufahren:
+
+      Drücke die Eingabetaste oder tippe auf den Bildschirm, um zu Windows zurückzukehren, oder
+
+      drücke STRG+ALT+ENTF, um den Computer neu zu starten. Wenn du das tust,
+      gehen alle nicht gespeicherten Informationen in allen geöffneten Anwendungen verloren.
+
+      Fehler: 0E  : 016F : BFF9B3D4
+    </div>
+
+    <div class="bsod-press">
+      Drücke eine beliebige Taste, um fortzufahren <span class="bsod-cursor">_</span>
+      <br><br>
+      <span class="bsod-hint">(oder auf den Bildschirm tippen)</span>
+    </div>
+
+    <!-- Unsichtbarer Fullscreen-Button für dein JS -->
+    <button id="mobileTapButton" type="button" aria-label="Fortfahren"></button>
+  </div>
+</div>
+
+<!-- Wallpaper -->
+<div class="xp-wallpaper" aria-hidden="true"></div>
+
+<!-- Desktop Icons -->
+<div class="xp-icons">
+  <button class="xp-icon" data-window="win-projects">
+    <span class="xp-icon-image xp-icon-projects"></span>
+    <span class="xp-icon-label">Meine Projekte</span>
+  </button>
+
+  <button class="xp-icon" data-window="win-cv">
+    <span class="xp-icon-image xp-icon-cv"></span>
+    <span class="xp-icon-label">Mein Lebenslauf</span>
+  </button>
+
+  <button class="xp-icon" data-window="win-contact">
+    <span class="xp-icon-image xp-icon-contact"></span>
+    <span class="xp-icon-label">Kontakt</span>
+  </button>
+
+  <button class="xp-icon" data-window="win-notes">
+    <span class="xp-icon-image xp-icon-notes"></span>
+    <span class="xp-icon-label">Notizen</span>
+  </button>
+
+  <!-- Desktop Icon: Paint -->
+  <button class="xp-icon" data-window="paintWindow">
+    <img src="/img/icons/paint.png" alt="Paint Icon">
+    <span>Paint</span>
+  </button>
+</div>
+
+<!-- XP Window: Paint -->
+<div class="xp-window"
+     id="paintWindow"
+     data-title="Paint"
+     data-icon="/img/icons/paint.png"
+     aria-hidden="true"
+     style="top: 120px; left: 160px; width: 780px; height: 520px;">
+
+  <!-- Titelzeile im XP Stil -->
+  <header class="xp-window-header">
+    <img class="xp-window-icon" alt="">
+    <span class="xp-window-title">Unbenannt - Paint</span>
+    <div class="xp-window-buttons">
+      <button class="btn-min" type="button" aria-label="Minimieren"></button>
+      <button class="btn-max" type="button" aria-label="Maximieren"></button>
+      <button class="btn-close" type="button" aria-label="Schließen"></button>
+    </div>
+  </header>
+
+  <!-- Inhalt: JS Paint im iframe + Lizenz Hinweis -->
+  <div class="xp-window-body xp-paint-window-body">
+    <iframe
+      class="xp-paint-frame"
+      src="https://jspaint.app"
+      title="JS Paint"
+      loading="lazy">
+    </iframe>
+
+    <div class="xp-paint-footer">
+      Powered by
+      <a href="https://jspaint.app" target="_blank" rel="noopener noreferrer">
+        JS Paint
+      </a>
+      (MIT License)
+    </div>
+  </div>
+
+  <!-- Resize Ecke -->
+  <div class="xp-window-resize"></div>
+</div>
+
+<!-- Fenster: Projects -->
+<section id="win-projects"
+         class="xp-window"
+         data-title="Meine Projekte"
+         data-icon="/img/icons/shell32.dll_14_20-6.png"
+         data-locked="true"
+         aria-hidden="true">
+  <header class="xp-window-header">
+    <img class="xp-window-icon" alt="">
+    <span class="xp-window-title">Meine Projekte</span>
+    <div class="xp-window-buttons">
+      <button class="btn-min" type="button" aria-label="Minimieren"></button>
+      <button class="btn-max" type="button" aria-label="Maximieren"></button>
+      <button class="btn-close" type="button" aria-label="Schließen"></button>
+    </div>
+  </header>
+
+  <div class="xp-window-body xp-window-body-scroll">
+    <div class="xp-explorer">
+
+      <!-- Toolbar + Address bar wie im Explorer -->
+      <div class="xp-explorer-toolbar">
+        <button type="button" class="xp-nav-btn xp-nav-back">
+          <span class="xp-nav-icon xp-nav-icon-back"></span>
+          <span class="xp-nav-label">Zurück</span>
+        </button>
+        <button type="button" class="xp-nav-btn xp-nav-toggle-sidebar">
+          <span class="xp-nav-icon xp-nav-icon-files"></span>
+          <span class="xp-nav-label">Sidebar</span>
+        </button>
+
+        <button type="button" class="xp-nav-btn">
+          <span class="xp-nav-icon xp-nav-icon-search"></span>
+          <span class="xp-nav-label">Suchen</span>
+        </button>
+
+        <button type="button" class="xp-nav-btn">
+          <span class="xp-nav-icon xp-nav-icon-files"></span>
+          <span class="xp-nav-label">Ordner</span>
+        </button>
+
+        <span class="xp-address-label">Adresse</span>
+        <div class="xp-address-bar">
+          <span class="xp-address-folder-icon"></span>
+          <input id="xpAddress" type="text" value="Meine Projekte" readonly>
+        </div>
+        <button type="button" class="xp-go-btn">
+          <span class="xp-go-icon"></span>
+        </button>
+      </div>
+
+      <!-- linke blaue Spalte -->
+      <aside class="xp-explorer-sidebar">
+        <div class="xp-explorer-group">
+          <h3 class="xp-explorer-title">Systemaufgaben</h3>
+          <a href="#" class="xp-explorer-link">Systeminformationen anzeigen</a>
+          <a href="#" class="xp-explorer-link">Programme hinzufügen oder entfernen</a>
+          <a href="#" class="xp-explorer-link">Einstellungen ändern</a>
+        </div>
+
+        <div class="xp-explorer-group">
+          <h3 class="xp-explorer-title">Weitere Orte</h3>
+          <a href="#" class="xp-explorer-link">Netzwerkumgebung</a>
+          <a href="#" class="xp-explorer-link">Eigene Dateien</a>
+          <a href="#" class="xp-explorer-link">Gemeinsame Dokumente</a>
+          <a href="#" class="xp-explorer-link">Systemsteuerung</a>
+        </div>
+
+        <div class="xp-explorer-group">
+          <h3 class="xp-explorer-title">Details</h3>
+          <a href="https://github.com/degelblau" target="_blank" rel="noopener" class="xp-explorer-link xp-explorer-link-github">
+            <span class="xp-github-icon"></span>
+            <span>Mein Github</span>
+          </a>
+        </div>
+        <!-- <div class="fredo">
+          <video width="auto" height="60px" autoplay>
+            <source src="/img/xp_fredo.mp4" type="video/mp4">
+            <source src="/img/xp_fredo.ogg" type="video/ogg">
+            Your browser does not support the video tag.
+          </video>
+        </div> -->
+      </aside>
+
+      <!-- rechte Seite: Übersicht + Detailansichten -->
+      <section class="xp-explorer-main">
+
+        <!-- Übersicht mit Ordnern -->
+        <div class="xp-projects-overview">
+          <h2 class="xp-explorer-heading">Websites</h2>
+          <div class="xp-projects-grid">
+            <button class="xp-project-folder" type="button" data-project="proj-toasti">
+              <span class="xp-project-folder-icon"></span>
+              <span class="xp-project-folder-label">Lorem Ipsum</span>
+            </button>
+
+            <button class="xp-project-folder" type="button" data-project="proj-paula">
+              <span class="xp-project-folder-icon"></span>
+              <span class="xp-project-folder-label">Dolor Sit</span>
+            </button>
+
+            <button class="xp-project-folder" type="button" data-project="proj-witzel">
+              <span class="xp-project-folder-icon"></span>
+              <span class="xp-project-folder-label">Amet Consetetur</span>
+            </button>
+
+            <button class="xp-project-folder" type="button" data-project="proj-piz">
+              <span class="xp-project-folder-icon"></span>
+              <span class="xp-project-folder-label">Sadipscing Elitr</span>
+            </button>
+          </div>
+
+          <h2 class="xp-explorer-heading">Webapps und Experimente</h2>
+          <div class="xp-projects-grid">
+            <button class="xp-project-folder" type="button" data-project="proj-toasti-chess">
+              <span class="xp-project-folder-icon"></span>
+              <span class="xp-project-folder-label">Tempor App</span>
+            </button>
+
+            <button class="xp-project-folder" type="button" data-project="proj-birthday">
+              <span class="xp-project-folder-icon"></span>
+              <span class="xp-project-folder-label">Invidunt Tool</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Detailansichten (eine pro Projekt, mit Lorem Placeholder) -->
+        <article class="xp-project-detail" id="proj-toasti" hidden>
+          <header class="xp-project-detail-head">
+            <h1>Lorem Ipsum</h1>
+            <p class="xp-project-meta">2025 – Projekt – Lorem ipsum dolor sit amet</p>
+          </header>
+
+          <p class="xp-project-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+
+          <ul class="xp-project-points">
+            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</li>
+            <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</li>
+          </ul>
+
+          <div class="xp-project-actions">
+            <a href="#" class="xp-btn-link" target="_blank" rel="noopener">Live-Demo öffnen</a>
+            <a href="#" class="xp-btn-link" target="_blank" rel="noopener">Code ansehen</a>
+          </div>
+
+          <button type="button" class="xp-project-back" data-project-back>◀ Zurück zu Meine Projekte</button>
+        </article>
+
+        <article class="xp-project-detail" id="proj-paula" hidden>
+          <header class="xp-project-detail-head">
+            <h1>Dolor Sit</h1>
+            <p class="xp-project-meta">2025 – Projekt – Dolor sit amet</p>
+          </header>
+
+          <p class="xp-project-text">
+            Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+
+          <ul class="xp-project-points">
+            <li>Dolor sit amet, consectetur adipiscing elit.</li>
+            <li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+            <li>Ut enim ad minim veniam, quis nostrud exercitation.</li>
+          </ul>
+
+          <div class="xp-project-actions">
+            <a href="#" class="xp-btn-link" target="_blank" rel="noopener">Case Study öffnen</a>
+          </div>
+
+          <button type="button" class="xp-project-back" data-project-back>◀ Zurück zu Meine Projekte</button>
+        </article>
+
+        <!-- TODO-Kommentar entfernt, damit nichts Reales geleakt wird -->
+      </section>
+    </div>
+  </div>
+
+  <div class="xp-window-resize" aria-hidden="true"></div>
+</section>
+
+<!-- Fenster: CV -->
+<section id="win-cv"
+         class="xp-window"
+         data-title="Mein Lebenslauf"
+         data-icon="/img/icons/wordpad.exe_14_128-5.png"
+         data-locked="true"
+         aria-hidden="true">
+  <header class="xp-window-header">
+    <img class="xp-window-icon" alt="">
+    <span class="xp-window-title">Mein Lebenslauf</span>
+    <div class="xp-window-buttons">
+      <button class="btn-min" type="button" aria-label="Minimieren"></button>
+      <button class="btn-max" type="button" aria-label="Maximieren"></button>
+      <button class="btn-close" type="button" aria-label="Schließen"></button>
+    </div>
+  </header>
+
+  <div class="xp-window-body xp-window-body-scroll xp-cv-window">
+    <div class="xp-cv-explorer">
+
+      <!-- XP CV Toolbar -->
+      <div class="xp-cv-toolbar">
+        <div class="xp-cv-toolbar-row1">
+          <button class="xp-cv-btn xp-cv-btn-large">
+            <span class="xp-cv-icon xp-cv-icon-back"></span>
+            <span class="xp-cv-btn-text">Zurück</span>
+            <span class="xp-cv-btn-arrow"></span>
+          </button>
+
+          <button class="xp-cv-btn xp-cv-btn-large">
+            <span class="xp-cv-icon xp-cv-icon-forward"></span>
+            <span class="xp-cv-btn-text"></span>
+            <span class="xp-cv-btn-arrow"></span>
+          </button>
+
+          <button class="xp-cv-btn xp-cv-btn-large">
+            <span class="xp-cv-icon xp-cv-icon-up"></span>
+          </button>
+
+          <button class="xp-cv-btn xp-cv-btn-large">
+            <span class="xp-cv-icon xp-cv-icon-folder"></span>
+            <span class="xp-cv-btn-text">Ordner</span>
+          </button>
+
+          <button class="xp-cv-btn xp-cv-btn-large">
+            <span class="xp-cv-icon xp-cv-icon-search"></span>
+            <span class="xp-cv-btn-text">Suchen</span>
+          </button>
+
+          <button class="xp-cv-btn xp-cv-btn-large">
+            <span class="xp-cv-icon xp-cv-icon-files"></span>
+            <span class="xp-cv-btn-text">Dateien</span>
+            <span class="xp-cv-btn-arrow"></span>
+          </button>
+        </div>
+
+        <!-- Address bar row -->
+        <div class="xp-cv-toolbar-row2">
+          <span class="xp-cv-address-label">Adresse</span>
+
+          <div class="xp-cv-address-box">
+            <span class="xp-address-folder-icon"></span>
+            <input id="xpCvAddress" type="text" value="Mein Lebenslauf" readonly>
+            <button class="xp-cv-dropbtn"></button>
+          </div>
+
+          <button class="xp-cv-go-btn"></button>
+        </div>
+      </div>
+
+      <!-- „Seite“ mit Lebenslauf -->
+      <div class="xp-cv-page">
+        <!-- Kopfbereich mit Bild + Name -->
+        <header class="xp-cv-header">
+          <div class="xp-cv-photo"></div>
+
+          <div class="xp-cv-header-text">
+            <h1 class="xp-cv-name">Vivian Degelau</h1>
+            <p class="xp-cv-subtitle">
+              Mediengestalterin Digital &amp; Print<br>
+              Web&nbsp;design &amp; UI/UX
+            </p>
+          </div>
+
+          <div class="xp-cv-header-role">
+            <span>Webdesignerin</span>
+          </div>
+        </header>
+
+        <!-- Ausbildung (Lorem) -->
+        <section class="xp-cv-section">
+          <h2 class="xp-cv-section-title">Ausbildung</h2>
+
+          <p class="xp-cv-line">
+            <strong>Lorem ipsum dolor sit amet</strong><br>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+
+          <p class="xp-cv-line">
+            <strong>Consetetur sadipscing elitr</strong><br>
+            Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+          </p>
+
+          <p class="xp-cv-line">
+            <strong>At vero eos et accusam</strong><br>
+            Et justo duo dolores et ea rebum. Stet clita kasd gubergren.
+          </p>
+        </section>
+
+        <!-- Berufserfahrung (Lorem) -->
+        <section class="xp-cv-section">
+          <h2 class="xp-cv-section-title">Berufserfahrung</h2>
+
+          <p class="xp-cv-line">
+            <strong>Lorem ipsum – Dolor sit amet</strong><br>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.
+          </p>
+          <ul class="xp-cv-list">
+            <li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</li>
+            <li>Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.</li>
+            <li>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.</li>
+          </ul>
+        </section>
+
+        <!-- Skills (Lorem) -->
+        <section class="xp-cv-section">
+          <h2 class="xp-cv-section-title">Skills</h2>
+
+          <p class="xp-cv-line">
+            <strong>Tools:</strong> Lorem ipsum, dolor sit amet, consetetur sadipscing elitr.
+          </p>
+          <p class="xp-cv-line">
+            <strong>Web:</strong> Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.
+          </p>
+          <p class="xp-cv-line">
+            <strong>Fokus:</strong> At vero eos et accusam et justo duo dolores et ea rebum.
+          </p>
+        </section>
+
+        <!-- Download Button -->
+        <div class="xp-cv-download-row">
+          <a href="#" class="xp-cv-download-btn">
+            Lebenslauf herunterladen
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="xp-window-resize" aria-hidden="true"></div>
+</section>
+
+<!-- Fenster: Contact -->
+<section id="win-contact"
+         class="xp-window"
+         data-title="Kontakt"
+         data-icon="/img/icons/mail.png"
+         aria-hidden="true">
+  <header class="xp-window-header">
+    <img class="xp-window-icon" alt="">
+    <span class="xp-window-title">Kontakt</span>
+    <div class="xp-window-buttons">
+      <button class="btn-min" type="button" aria-label="Minimieren"></button>
+      <button class="btn-max" type="button" aria-label="Maximieren"></button>
+      <button class="btn-close" type="button" aria-label="Schließen"></button>
+    </div>
+  </header>
+
+  <div class="xp-window-body xp-window-body-scroll xp-mail-window">
+  <!-- Menüleiste -->
+  <div class="xp-mail-menubar">
+    <span>Datei</span>
+    <span>Bearbeiten</span>
+    <span>Ansicht</span>
+    <span>Einfügen</span>
+    <span>Format</span>
+    <span>Extras</span>
+    <span>Nachricht</span>
+    <span>Hilfe</span>
+  </div>
+
+  <!-- Toolbar mit Icons + Text darunter -->
+  <div class="xp-mail-toolbar">
+  <button class="xp-mail-tool xp-mail-tool-primary" type="submit" form="contactForm">
+    <span class="xp-mail-tool-icon xp-mail-icon-send"></span>
+    <span class="xp-mail-tool-label">Senden</span>
+  </button>
+
+  <button class="xp-mail-tool" type="button">
+    <span class="xp-mail-tool-icon xp-mail-icon-cut"></span>
+    <span class="xp-mail-tool-label">Ausschneiden</span>
+  </button>
+
+  <button class="xp-mail-tool" type="button">
+    <span class="xp-mail-tool-icon xp-mail-icon-copy"></span>
+    <span class="xp-mail-tool-label">Kopieren</span>
+  </button>
+
+  <button class="xp-mail-tool" type="button">
+    <span class="xp-mail-tool-icon xp-mail-icon-paste"></span>
+    <span class="xp-mail-tool-label">Einfügen</span>
+  </button>
+
+  <button class="xp-mail-tool" type="button">
+    <span class="xp-mail-tool-icon xp-mail-icon-undo"></span>
+    <span class="xp-mail-tool-label">Rückgängig</span>
+  </button>
+
+  <button class="xp-mail-tool" type="button">
+    <span class="xp-mail-tool-icon xp-mail-icon-redo"></span>
+    <span class="xp-mail-tool-label">Wiederholen</span>
+  </button>
+
+<!--   <button class="xp-mail-tool" type="button">
+    <span class="xp-mail-tool-icon xp-mail-icon-priority"></span>
+    <span class="xp-mail-tool-label">Priorität</span>
+  </button>
+
+  <button class="xp-mail-tool" type="button">
+    <span class="xp-mail-tool-icon xp-mail-icon-sign"></span>
+    <span class="xp-mail-tool-label">Signieren</span>
+  </button> -->
+</div>
+
+  <!-- Formular -->
+  <form class="xp-mail-form"
+      id="contactForm"
+      action="https://formspree.io/f/xdkvajyn"
+      method="POST">
+
+  <div class="xp-mail-headers">
+
+    <div class="xp-mail-row">
+      <label class="xp-mail-label" for="mail-to">An:</label>
+      <input class="xp-mail-input xp-mail-input-fixed"
+             id="mail-to"
+             type="email"
+             value="vivian@degelau.com"
+             readonly>
+    </div>
+
+    <div class="xp-mail-row">
+      <label class="xp-mail-label" for="mail-from">Von:</label>
+      <input class="xp-mail-input"
+             id="mail-from"
+             name="from"
+             type="email"
+             placeholder="deine@email.de"
+             required>
+    </div>
+
+    <div class="xp-mail-row">
+      <label class="xp-mail-label" for="mail-subject">Betreff:</label>
+      <input class="xp-mail-input"
+             id="mail-subject"
+             name="subject"
+             type="text"
+             placeholder="Betreff..."
+             required>
+    </div>
+  </div>
+
+  <div class="xp-mail-message">
+    <textarea name="message"
+              placeholder="Nachricht hier eingeben..."
+              required></textarea>
+  </div>
+
+  <input type="hidden" name="_subject" value="Neue Nachricht von der XP Portfolio Seite">
+  <p class="formular-hinweis">
+    <b>Hinweis:</b> Deine Nachricht wird über den Dienst <a href="https://formspree.io" target="_blank">Formspree</a> gesendet.
+  </p>
+  <p class="xp-mail-footer-note">
+    Hast du einen Fehler gefunden, Feedback zu dieser Website, möchtest über ein Projekt sprechen oder einfach nur Hallo sagen?
+Dann schreib mir gerne! Ich antworte so schnell ich kann.
+  </p>
+</form>
+</div>
+
+  <div class="xp-window-resize" aria-hidden="true"></div>
+</section>
+
+<!-- Fenster: Notes -->
+<section id="win-notes"
+         class="xp-window"
+         data-title="Notizen"
+         data-icon="/img/icons/NOTEPAD.EXE_14_2-6.png"
+         aria-hidden="true">
+  <header class="xp-window-header">
+    
+    <img class="xp-window-icon" alt="">
+    <span class="xp-window-title">Notizen.txt</span>
+    <div class="xp-window-buttons">
+      <button class="btn-min" type="button" aria-label="Minimieren"></button>
+      <button class="btn-max" type="button" aria-label="Maximieren"></button>
+      <button class="btn-close" type="button" aria-label="Schließen"></button>
+    </div>
+  </header>
+
+  <div class="xp-mail-menubar">
+    <span>Datei</span>
+    <span>Bearbeiten</span>
+    <span>Ansicht</span>
+    <span>Einfügen</span>
+    <span>Format</span>
+    <span>Extras</span>
+    <span>Nachricht</span>
+    <span>Hilfe</span>
+  </div>
+
+
+    <textarea class="xp-notes-area">TODO:
+- Portfolio fertigbauen
+- Toasti Schach releasen
+- Sven zum Lernen treten ❤️
+    </textarea>
+  </div>
+  <div class="xp-window-resize" aria-hidden="true"></div>
+</section>
+
+<!-- Taskbar (nur EINMAL!) -->
+<footer class="xp-taskbar">
+  <button class="xp-start-btn" type="button" aria-expanded="false">
+    <span class="xp-start-logo"></span>
+    <span class="xp-start-label">Start</span>
+  </button>
+
+  <div class="xp-task-buttons" id="taskButtons"></div>
+
+  <div class="xp-tray">
+<!--     <img class="xp-tray-flag" src="/img/wappen.webp" alt="Sprache: Deutsch"> -->
+
+    <!-- Vollbild-Button -->
+    <button class="xp-tray-fullscreen" type="button" aria-label="Vollbild umschalten">
+      <img src="/img/icons/migload.exe_14_2000-6_alpha.png" alt="Fullscreen">
+    </button>
+
+    <span class="xp-tray-clock" id="xpClock">9:41 AM</span>
+  </div>
+</footer>
+
+<!-- Startmenü -->
+<div class="xp-start-menu" id="xpStartMenu" aria-hidden="true">
+  <div class="xp-start-inner">
+    <header class="xp-start-header">
+      <div class="xp-start-avatar">
+        <img src="/img/vivian.jpg" alt="Vivian Degelau">
+      </div>
+      <span class="xp-start-username">Vivian Degelau</span>
+    </header>
+
+    <!-- Gradient-Linie unter dem Header -->
+    <hr class="xp-divider" aria-hidden="true">
+
+    <div class="xp-start-columns">
+      <!-- Linke Spalte -->
+      <nav class="xp-start-col xp-start-col-main">
+        <div class="xp-start-main-inner">
+          <button class="xp-start-item" type="button" data-window="win-projects">
+            <span class="xp-start-item-icon xp-ico-projects"></span>
+            <span class="xp-start-item-text">
+              <strong>Meine Projekte</strong>
+              <span class="xp-start-item-sub">Alle Projekte ansehen</span>
+            </span>
+          </button>
+
+          <button class="xp-start-item" type="button" data-window="win-contact">
+            <span class="xp-start-item-icon xp-ico-contact"></span>
+            <span class="xp-start-item-text">
+              <strong>Kontakt</strong>
+              <span class="xp-start-item-sub">Nachricht hinterlassen</span>
+            </span>
+          </button>
+
+          <hr class="xp-start-separator">
+
+          <button class="xp-start-item" type="button" data-window="win-cv">
+            <span class="xp-start-item-icon xp-ico-cv"></span>
+            <span class="xp-start-item-text">
+              <strong class="notstrong">Mein Lebenslauf</strong>
+              <span class="xp-start-item-sub">Lebenslauf ansehen</span>
+            </span>
+          </button>
+
+          <button class="xp-start-item" type="button" data-window="win-notes">
+            <span class="xp-start-item-icon xp-ico-notes"></span>
+            <span class="xp-start-item-text">
+              <strong class="notstrong">Notizen</strong>
+              <span class="xp-start-item-sub">Schnelle Ideen und Todos</span>
+            </span>
+          </button>
+
+          <a href="/impressum/index.html" class="xp-start-item legal" type="button">
+            <span class="xp-start-item-icon xp-ico-legal"></span>
+            <span class="xp-start-item-text">
+              <strong class="notstrong">Impressum</strong>
+            </a>
+
+          <a href="../datenschutz/index.html" class="xp-start-item legal" type="button">
+            <span class="xp-start-item-icon xp-ico-legal"></span>
+            <span class="xp-start-item-text">
+              <strong class="notstrong">Datenschutz</strong>
+            </a>
+
+          <button class="xp-start-item" type="button" data-window="paintWindow">
+            <span class="xp-start-item-icon xp-ico-paint"></span>
+            <span class="xp-start-item-text">
+              <strong class="notstrong">Paint</strong>
+            </span>
+          </button>
+
+          <!-- Trennlinie vor All Programs -->
+          <hr class="xp-start-separator">
+
+          <!-- Alle Programme + Flyout -->
+          <div class="xp-all-wrapper">
+            <button class="xp-all-programs" type="button">
+              <span class="xp-all-programs-label">Alle Programme</span>
+              <span class="xp-all-programs-arrow">▶</span>
+            </button>
+
+            <div class="xp-all-programs-panel">
+              <button class="xp-all-programs-item" type="button" data-window="win-projects">
+                <span class="xp-all-programs-icon xp-ico-projects"></span>
+                <span>Meine Projekte</span>
+              </button>
+              <button class="xp-all-programs-item" type="button" data-window="win-notes">
+                <span class="xp-all-programs-icon xp-ico-notes"></span>
+                <span>Notizen</span>
+              </button>
+              <button class="xp-all-programs-item" type="button" data-window="win-cv">
+                <span class="xp-all-programs-icon xp-ico-cv"></span>
+                <span>Mein Lebenslauf</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Rechte Spalte -->
+      <nav class="xp-start-col xp-start-col-side">
+
+        <div class="xp-start-social">
+
+          <a href="https://www.instagram.com/oopsvergessen_o.o/"
+            target="_blank"
+            class="xp-start-item xp-social-item">
+
+            <img src="/img/icons/instagram.webp" alt="Instagram">
+            <div>
+              <strong>Instagram</strong><br>
+              <span class="xp-start-item-sub">@oopsvergessen</span>
+            </div>
+          </a>
+
+          <a href="https://github.com/degelblau"
+            target="_blank"
+            class="xp-start-item xp-social-item">
+
+            <img src="/img/icons/github.png" alt="GitHub">
+            <div>
+              <strong>GitHub</strong><br>
+              <span class="xp-start-item-sub">@degelblau</span>
+            </div>
+          </a>
+
+        </div>
+
+        <button class="xp-start-item xp-start-item-small" type="button">
+          <span class="xp-start-item-icon xp-ico-music"></span>
+          <span class="xp-start-item-text"><strong class="notstrong">Meine Musik</strong></span>
+        </button>
+
+        <button class="xp-start-item xp-start-item-small" type="button">
+          <span class="xp-start-item-icon xp-ico-folder"></span>
+          <span class="xp-start-item-text"><strong class="notstrong">Eigene Dateien</strong></span>
+        </button>
+
+        <button class="xp-start-item xp-start-item-small" type="button">
+          <span class="xp-start-item-icon xp-ico-pictures"></span>
+          <span class="xp-start-item-text"><strong class="notstrong">Eigene Bilder</strong></span>
+        </button>
+
+        <button class="xp-start-item xp-start-item-small" type="button">
+          <span class="xp-start-item-icon xp-ico-calendar"></span>
+          <span class="xp-start-item-text"><strong class="notstrong">Kalender</strong></span>
+        </button>
+
+        <hr class="xp-start-separator">
+
+        <div class="xp-start-submenu-wrapper">
+          <button class="xp-start-item xp-start-item-small xp-start-submenu-trigger" type="button">
+            <span class="xp-start-item-icon xp-ico-recent"></span>
+            <span class="xp-start-item-text"><strong class="notstrong">Zuletzt verwendet</strong></span>
+            <span class="xp-recently-used-arrow">▶</span>
+          </button>
+
+          <hr class="xp-start-separator">
+
+          <div class="xp-start-submenu-panel">
+            <button class="xp-all-programs-item recently" type="button" data-window="win-projects">
+              <span class="xp-all-programs-icon xp-ico-projects recently-icon"></span>
+              <span>Meine Projekte</span>
+            </button>
+            <button class="xp-all-programs-item recently" type="button" data-window="win-notes">
+              <span class="xp-all-programs-icon xp-ico-notes recently-icon"></span>
+              <span>Notizen</span>
+            </button>
+            <button class="xp-all-programs-item recently" type="button" data-window="win-cv">
+              <span class="xp-all-programs-icon xp-ico-cv recently-icon"></span>
+              <span>Mein Lebenslauf</span>
+            </button>
+          </div>
+        </div>
+
+        <button class="xp-start-item xp-start-item-small" type="button">
+          <span class="xp-start-item-icon xp-ico-mines"></span>
+          <span class="xp-start-item-text"><strong class="notstrong">Minesweeper</strong></span>
+        </button>
+
+        <button class="xp-start-item xp-start-item-small" type="button">
+          <span class="xp-start-item-icon xp-ico-notepad"></span>
+          <span class="xp-start-item-text"><strong class="notstrong">Editor</strong></span>
+        </button>
+      </nav>
+    </div>
+
+    <footer class="xp-start-footer">
+      <button class="xp-start-footer-btn xp-start-logoff" type="button">
+        Abmelden
+      </button>
+      <button class="xp-start-footer-btn xp-start-shutdown" type="button">
+        Computer ausschalten
+      </button>
+    </footer>
+  </div>
+</div>
+
+<!-- Shutdown-Dialog -->
+<div class="xp-shutdown-overlay" id="xpShutdown" aria-hidden="true">
+  <div class="xp-shutdown-dialog">
+    <div class="xp-shutdown-header">
+      Computer ausschalten
+      <span class="xp-shutdown-logo"></span>
+    </div>
+
+    <div class="xp-shutdown-body">
+      <button class="xp-shutdown-option xp-shutdown-standby" type="button">
+        <span class="xp-shutdown-icon"></span>
+        <span class="xp-shutdown-label">Bereitschaft</span>
+      </button>
+
+      <button class="xp-shutdown-option xp-shutdown-turnoff" type="button">
+        <span class="xp-shutdown-icon"></span>
+        <span class="xp-shutdown-label">Ausschalten</span>
+      </button>
+
+      <button class="xp-shutdown-option xp-shutdown-restart" type="button">
+        <span class="xp-shutdown-icon"></span>
+        <span class="xp-shutdown-label">Neu starten</span>
+      </button>
+    </div>
+
+    <div class="xp-shutdown-footer">
+      <button class="xp-btn xp-shutdown-cancel" id="xpShutdownCancel" type="button">
+        Abbrechen
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Schwarzer Bildschirm (Turn Off) -->
+<div class="xp-black-screen" id="xpBlackScreen" aria-hidden="true"></div>
+
+<!-- Screensaver (Stand By) -->
+<div class="xp-screensaver-overlay" id="xpScreensaver" aria-hidden="true">
+  <video
+    id="xpScreensaverVideo"
+    src="/img/bildschirmschoner.m4v"
+    autoplay
+    loop
+    muted
+  ></video>
+</div>
+
+<!-- XP Error Dialog -->
+<div class="xp-error-overlay" id="xpErrorOverlay" aria-hidden="true">
+  <div class="xp-error-modal">
+    <header class="xp-window-header xp-error-header">
+      <img class="xp-window-icon" src="/img/icons/error.png" alt="">
+      <span class="xp-window-title">C:\CALC.EXE</span>
+      <div class="xp-window-buttons">
+        <button class="btn-close xp-error-close" type="button" aria-label="Close"></button>
+      </div>
+    </header>
+
+    <div class="xp-window-body">
+      <div class="xp-error-body">
+        <div class="xp-error-icon" aria-hidden="true"></div>
+        <p class="xp-error-text">
+          Die Seite befindet sich aktuell noch im Aufbau, weshalb einige Funktionen noch nicht optimal
+          funktionieren. :) <br>
+        </p>
+      </div>
+
+      <div class="xp-error-footer">
+        <button class="xp-btn" id="xpErrorOk" type="button">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- XP Error Dialog - Platzhalter / Bald verfügbar -->
+<div class="xp-error-overlay" id="xpLockedOverlay" aria-hidden="true">
+  <div class="xp-error-modal">
+    <header class="xp-window-header xp-error-header">
+      <img class="xp-window-icon" src="/img/icons/comctl32.dll_14_20482-6_alpha.png" alt="">
+      <span class="xp-window-title">C:\COMINGSOON.EXE</span>
+      <div class="xp-window-buttons">
+        <button class="btn-close xp-locked-close" type="button" aria-label="Schließen"></button>
+      </div>
+    </header>
+
+    <div class="xp-window-body">
+      <div class="xp-error-body">
+        <div class="xp-error-icon-2" aria-hidden="true"></div>
+        <p class="xp-error-text">
+          Dieses Fenster ist noch nicht verfügbar.<br>
+          Ich baue hier gerade noch weiter. Bitte schau bald wieder vorbei.
+        </p>
+      </div>
+
+      <div class="xp-error-footer">
+        <button class="xp-btn" id="xpLockedOk" type="button">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- XP Success Dialog -->
+<div class="xp-error-overlay" id="xpSuccessOverlay" aria-hidden="true">
+  <div class="xp-error-modal">
+    <header class="xp-window-header xp-error-header">
+      <!-- Icon kannst du später frei ändern -->
+      <img class="xp-window-icon" src="/img/icons/napstat.exe_14_103-6_alpha.png" alt="">
+      <span class="xp-window-title">C:\MAILSENT.EXE</span>
+      <div class="xp-window-buttons">
+        <button class="btn-close xp-success-close" type="button" aria-label="Schließen"></button>
+      </div>
+    </header>
+
+    <div class="xp-window-body">
+      <div class="xp-error-body">
+        <div class="xp-error-icon-3" aria-hidden="true"></div>
+        <p class="xp-error-text">
+          Deine Nachricht wurde erfolgreich gesendet.<br>
+          Vielen Dank, ich melde mich so schnell wie möglich bei dir.
+        </p>
+      </div>
+
+      <div class="xp-error-footer">
+        <button class="xp-btn" id="xpSuccessOk" type="button">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Sounds für Error und Ding -->
+<audio id="xpErrorSound"
+       src="/img/sounds/windows-error-sound.mp3"
+       preload="auto"></audio>
+
+<audio id="xpLockedErrorSound"
+       src="/img/sounds/Windows-XP-Error.mp3"
+       preload="auto"></audio>
+
+<audio id="xpDingSound"
+       src="/img/sounds/Windows_XP_Ding.mp3"
+       preload="auto"></audio>
+
+       <audio id="xpSuccessSound"
+       src="/img/sounds/windows-tadaa.mp3"
+       preload="auto"></audio>
+
+<!-- XP Balloon Notification -->
+<div id="xp-balloon" class="xp-balloon" aria-hidden="true">
+  <div class="xp-balloon-icon">
+    <img src="/img/icons/ahui.exe_14_2006-3.png" alt="info">
+  </div>
+<div class="xp-balloon-text">
+  <strong>Information</strong><br>
+  Für ein besseres Erlebnis kannst du die Seite
+  im Vollbildmodus verwenden. Sprachauswahl folgt bald!
+</div>
+  <button class="xp-balloon-close">✕</button>
+</div>
+
+<!-- XP Balloon Sound -->
+<audio id="xp-balloon-sound" src="/img/sounds/Windows_XP_Balloon.mp3" preload="auto"></audio>
+
+<audio id="xpSoundStart"
+       src="/img/sounds/public_sounds_start-windows.mp3"
+       preload="auto"></audio>
+
+<audio id="xpSoundShutdown"
+       src="/img/sounds/public_sounds_shutdown-windows.mp3"
+       preload="auto"></audio>
+
+<script src="/js/vivian.js"></script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+/* =============================
+   LEGAL: IMPRESSUM & DATENSCHUTZ
+   XP-TERMINAL / EDITOR LOOK
+   ============================= */
+
+/* Fenster soll den ganzen Screen einnehmen */
+
+:root {
+  --xp-blue-dark: #003399;
+  --xp-blue-light: #6487DC;
+  --xp-taskbar-blue: linear-gradient(rgb(31, 47, 134) 0px, rgb(49, 101, 196) 3%, rgb(54, 130, 229) 6%, rgb(68, 144, 230) 10%, rgb(56, 131, 229) 12%, rgb(43, 113, 224) 15%, rgb(38, 99, 218) 18%, rgb(35, 91, 214) 20%, rgb(34, 88, 213) 23%, rgb(33, 87, 214) 38%, rgb(36, 93, 219) 54%, rgb(37, 98, 223) 86%, rgb(36, 95, 220) 89%, rgb(33, 88, 212) 92%, rgb(29, 78, 192) 95%, rgb(25, 65, 165) 98%);
+  --xp-taskbar-border-top: #52A3F5;
+  --xp-window-header-top: #0A53D1;
+  --xp-window-header-bottom: #3C8DF6;
+  --xp-window-bg: black
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #000;
+  font-family: Consolas, "Courier New", monospace;
+  color: white;
+}
+
+body.xp-desktop {
+  background: black;
+}
+
+
+::selection {
+  background: #003399;
+  color: #fff;
+}
+
+
+
+
+
+/* Windows */
+.xp-window {
+  position: absolute;
+  top: 120px;
+  left: 220px;
+  width: 500px;
+  min-width: 260px;
+  min-height: 180px;
+  background: var(--xp-window-bg);
+  border: 1px solid #003399;
+  box-shadow: 2px 2px 6px rgba(0,0,0,.6);
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.xp-window[aria-hidden="true"] {
+  display: none;
+}
+
+/* Header */
+.xp-window-header {
+  height: 26px;
+  background: /* linear-gradient(to bottom,
+              var(--xp-window-header-top),
+              var(--xp-window-header-bottom))  var(--xp-taskbar-blue);*/
+              linear-gradient(180deg, #0997ff, #0053ee 8%, #0050ee 40%, #06f 88%, #06f 93%, #005bff 95%, #003dd7 96%, #003dd7);
+  color: #fff;
+  display: flex;
+  align-items: center;
+/*   justify-content: space-between;
+ */  padding: 0 4px;
+  cursor: move;
+}
+
+
+
+
+.xp-window-title {
+  font-weight: bold;
+  font-size: 12px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.7);
+  user-select: none;
+}
+
+.xp-window-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+/* Buttons oben rechts – einfache Quadrate */
+.xp-window-buttons button {
+  width: 18px;
+  height: 18px;
+
+  padding: 0;
+  cursor: pointer;
+}
+
+
+
+/* Body */
+.xp-window-body {
+  padding: 10px;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.xp-window-body-scroll {
+  overflow: auto;
+}
+
+.xp-window-body h1 {
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+
+.xp-list {
+  padding-left: 18px;
+}
+
+
+.xp-window-header {
+  font-family: "Trebuchet MS", system-ui, sans-serif;
+  font-size: 13px;
+  color: #fff;
+  text-shadow: 1px 1px #0f1089;
+
+  background: linear-gradient(
+    180deg,
+    #0997ff,
+    #0053ee 8%,
+    #0050ee 40%,
+    #0066ff 88%,
+    #0066ff 93%,
+    #005bff 95%,
+    #003dd7 96%,
+    #003dd7
+  );
+
+  padding: 3px 4px 3px 6px;
+  border-top: 1px solid #0831d9;
+  border-left: 1px solid #0831d9;
+  border-right: 1px solid #001ea0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 7px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 26px;
+  box-sizing: border-box;
+}
+
+/* Fenstertitel links */
+.xp-window-title {
+  font-weight: bold;
+  white-space: nowrap;
+  text-align: left;
+}
+
+/* Button-Gruppe rechts bündig */
+.xp-window-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+/* Die Buttons selbst – Icons hast du ja schon eingebunden */
+.xp-window-header .xp-window-buttons button {
+  all: unset;
+  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+/* Minimieren / Maximieren / Schließen – Pfade wie vorher */
+.btn-min {
+  background-image: url("../img/minimize.svg") !important;
+}
+.btn-max {
+  background-image: url("../img/maximize.svg") !important;
+}
+.btn-close {
+  background-image: url("../img/close.svg") !important;
+}
+
+.xp-window-header .xp-window-buttons button:hover {
+  filter: brightness(1.06);
+}
+.xp-window-header .xp-window-buttons button:active {
+  filter: brightness(0.9);
+}
+
+
+/* Icon links im Fenster-Header */
+.xp-window-header {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  padding-left: 6px;
+}
+
+.xp-window-icon {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+}
+
+/* Taskbar Icon */
+.xp-task-button-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  image-rendering: pixelated;
+}
+
+.xp-window-header {
+  display: flex;
+  align-items: center;
+  /* falls da noch justify-content: space-between oder center steht,
+     bitte rauswerfen */
+}
+
+.xp-window-title {
+  margin-left: 6px;
+  margin-right: 0;
+  text-align: left;
+  flex: 0 0 auto; /* nimmt nur so viel Platz wie nötig */
+}
+
+.xp-window-buttons {
+  margin-left: auto;  /* schiebt die Buttons ganz nach rechts */
+  display: flex;
+  gap: 2px;
+}
+
+
+/* ===== LEGAL – Vollbildfenster ===== */
+
+.xp-legal-window {
+  position: fixed;          /* statt absolute */
+  inset: 0;                 /* top/right/bottom/left = 0 */
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+}
+
+/* Body im Fenster: bis unten gehen und scrollen dürfen */
+.xp-legal-window .xp-window-body {
+  height: calc(100vh - 26px); /* 26px = Titelzeile */
+  overflow: auto;
+  padding: 32px 64px 48px;
+  background: #000;
+/*   border: 1px solid #00aa44;
+ */  border-top: none;
+}
+
+a {
+    color: #3C8DF6;
+}
+
+h1, h2, h3, h4, h5, h6, p, li {
+    font-size: 16px;
+    color: #FFFFFF;
+}
+
+
+
+
+
+
+/* BSOD blinking cursor */
+.bsod-cursor {
+  display: inline-block;
+  animation: blink-cursor 1s steps(2, start) infinite;
+  color: white;
+}
+
+@keyframes blink-cursor {
+  0%   { opacity: 1; }
+  49%  { opacity: 1; }
+  50%  { opacity: 0; }
+  99%  { opacity: 0; }
+  100% { opacity: 1; }
+}
