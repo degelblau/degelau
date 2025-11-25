@@ -925,7 +925,7 @@ if (contactForm) {
 
 
 
-window.addEventListener('contextmenu', e => {
+/* window.addEventListener('contextmenu', e => {
   e.preventDefault();
 });
 
@@ -933,4 +933,4 @@ window.addEventListener('keydown', e => {
   if ((e.ctrlKey && e.shiftKey && e.key === 'I') || e.key === 'F12') {
     e.preventDefault();
   }
-});
+}); */
