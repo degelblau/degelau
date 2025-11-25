@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (closeBtn) {
     closeBtn.addEventListener("click", () => {
       // Ziel ggf. anpassen
-      window.location.href = "/vivian/index.html";
+      window.location.href = "/vivian/";
     });
   }
 
