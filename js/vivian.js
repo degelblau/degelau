@@ -692,16 +692,16 @@ if (logoffBtn) {
     if (soundShutdown) {
       soundShutdown.currentTime = 0;
       soundShutdown.play().catch(() => {
-        window.location.href = '/vivian/';
+        window.location.href = '/';
       });
       soundShutdown.onended = () => {
-        window.location.href = '/vivian/';
+        window.location.href = '/';
       };
       setTimeout(() => {
-        window.location.href = '/vivian/';
+        window.location.href = '/';
       }, 6000);
     } else {
-      window.location.href = '/vivian/';
+      window.location.href = '/';
     }
   });
 }
@@ -790,7 +790,7 @@ if (turnoffBtn && blackScreen) {
   });
 
   blackScreen.addEventListener('click', () => {
-    window.location.href = '/vivian/';
+    window.location.href = '/';
   });
 }
 
@@ -802,18 +802,18 @@ if (restartBtn) {
     if (soundShutdown) {
       soundShutdown.currentTime = 0;
       soundShutdown.play().catch(() => {
-        window.location.href = '/vivian/';
+        window.location.href = '/';
       });
 
       soundShutdown.onended = () => {
-        window.location.href = '/vivian/';
+        window.location.href = '/';
       };
 
       setTimeout(() => {
-        window.location.href = '/vivian/';
+        window.location.href = '/';
       }, 6000);
     } else {
-      window.location.href = '/vivian/';
+      window.location.href = '/';
     }
   });
 }
@@ -924,6 +924,9 @@ if (contactForm) {
 }
 
 
+// =========================
+// RECHTSKLICK & DEVTOOLS BLOCKEN
+// =========================
 
 window.addEventListener('contextmenu', e => {
   e.preventDefault();
