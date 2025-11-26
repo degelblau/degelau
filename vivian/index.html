@@ -75,6 +75,11 @@
     <span class="xp-icon-image xp-icon-minesweeper"></span>
     <span class="xp-icon-label">Minesweeper</span>
   </button>
+
+  <button class="xp-icon" data-window="xpBrowserWindow">
+    <span class="xp-icon-image xp-icon-ie"></span>
+    <span class="xp-icon-label">Internet Explorer</span>
+  </button>
   
 </div>
 
@@ -302,6 +307,120 @@
 </section>
 
 
+
+
+
+<!-- =========================
+     INTERNET EXPLORER FENSTER
+     ========================= -->
+<!-- Fenster: Internet Explorer -->
+<section id="xpBrowserWindow"
+         class="xp-window xp-browser-window"
+         data-title="Internet Explorer"
+         data-icon="/img/icons/iexplore.exe_14_32528-6.png"
+         aria-hidden="true">
+  <header class="xp-window-header">
+    <img class="xp-window-icon" alt="">
+    <span class="xp-window-title">Internet Explorer</span>
+    <div class="xp-window-buttons">
+      <button class="btn-min" type="button" aria-label="Minimieren"></button>
+      <button class="btn-max" type="button" aria-label="Maximieren"></button>
+      <button class="btn-close" type="button" aria-label="Schließen"></button>
+    </div>
+  </header>
+
+  <div class="xp-window-body xp-window-body-fixed xp-browser-body">
+    <!-- Adressleiste (Back/Forward + URL + Suche) -->
+    <div class="xp-iex-address-row">
+      <button class="xp-iex-nav-btn" id="xpIexBack" title="Zurück">
+        <img src="/img/back.png" alt="">
+      </button>
+      <button class="xp-iex-nav-btn" id="xpIexForward" title="Weiter">
+        <img src="/img/forward.png" alt="">
+      </button>
+
+      <label class="xp-iex-address-label">
+        Address:
+        <input id="xpBrowserAddress"
+               class="xp-iex-address-input"
+               type="text"
+               value="https://degelau.com/vivian"
+               readonly>
+      </label>
+
+      <button class="xp-iex-go-btn" id="xpBrowserGo" title="Los">
+        <img src="/img/icons/shell32.dll_14_23-8.png"  alt="">
+      </button>
+    </div>
+
+    <!-- Tabs -->
+    <div class="xp-iex-tab-row">
+      <button class="xp-browser-tab active"
+              data-url="https://degelau.com/vivian">
+        <img src="/img/icons/agentsvr.exe_14_113-0_alpha.png" alt="">
+        <span>Desktop – Viv</span>
+      </button>
+      <button class="xp-browser-tab"
+              data-url="https://toast-bot.de/">
+        <img src="/img/icons/toasti.png" alt="">
+        <span>Toast-Bot </span>
+      </button>
+      <button class="xp-browser-tab"
+              data-url="https://alber.solutions">
+        <img src="/img/icons/alber-03.png" alt="">
+        <span>AlberSolutions [kommt bald]</span>
+      </button>
+<!--       <button class="xp-browser-tab"
+              data-url="https://www.instagram.com/tour.de.toast/">
+        <img src="/img/icons/instagram.webp" alt="">
+        <span>Tour de Toast</span>
+      </button> -->
+      <button class="xp-iex-tab-close" title="Alle Tabs schließen">✕</button>
+    </div>
+
+    <!-- Menü + Toolbar -->
+    <div class="xp-iex-menu-toolbar">
+      <div class="xp-iex-menu">
+        <button type="button">Datei</button>
+        <button type="button">Bearbeiten</button>
+        <button type="button">Ansicht</button>
+        <button type="button">Favoriten</button>
+        <button type="button">Werkzeuge</button>
+        <button type="button">Hilfe</button>
+      </div>
+      <div class="xp-iex-toolbar-icons">
+        <button type="button" title="Home">
+          <img src="/img/start.png" alt="">
+        </button>
+        <button type="button" title="Favorit">
+          <img src="/img/icons/shdoclc.dll_14_191-8.png" alt="">
+        </button>
+<!--         <button type="button" title="Kalender">
+          <img src="/img/kalender.png" alt="">
+        </button>
+        <button type="button" title="GitHub">
+          <img src="/img/github.png" alt="">
+        </button>
+        <button type="button" title="Toasti">
+          <img src="/img/toasti.png" alt="">
+        </button> -->
+      </div>
+    </div>
+
+    <!-- Inhalt -->
+    <div class="xp-iex-content">
+      <iframe id="xpBrowserFrame"
+              class="xp-iex-iframe"
+              src="https://degelau.com/vivian"
+              frameborder="0">
+      </iframe>
+    </div>
+  </div>
+  <div class="xp-window-resize" aria-hidden="true"></div>
+</section>
+
+
+  
 
 <!-- Fenster: minesweeper - -->
 <section id="minesweeperWindow"
