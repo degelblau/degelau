@@ -184,6 +184,14 @@ body.xp-desktop {
   background-image: url("../img/icons/NOTEPAD.EXE_14_2-6.png");    /* Notepad */
 }
 
+.xp-icon-paint {
+  background-image: url("../img/icons/paint.png"); /* Paint */
+}
+
+.xp-icon-minesweeper {
+  background-image: url("../img/icons/winmine.exe_14_100-5.png");  /* Minesweeper */
+}
+
 
 
 /* Startmenü Icons */
