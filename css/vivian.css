@@ -2969,5 +2969,280 @@ color: #979797 !important;
 
 
 
+/* =========================
+   INTERNET EXPLORER – XP STYLE
+   ========================= */
+
+.xp-browser-window {
+  width: 780px;
+  height: 520px;
+  min-width: 520px;
+  min-height: 360px;
+}
+
+.xp-browser-body {
+  background: #ece9d8;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+/* Adresszeile */
+
+.xp-iex-address-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 4px;
+    /* background: #f4f2e9; */
+    /* border: 1px solid #b3b1a6; */
+    /* border-top-color: #ffffff; */
+    /* border-left-color: #ffffff; */
+}
+
+.xp-iex-nav-btn {
+    width: auto;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.xp-iex-nav-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.xp-iex-address-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  flex: 1;
+}
+
+.xp-iex-address-input {
+  flex: 1;
+  height: 20px;
+  font-size: 11px;
+  border: 1px solid #7f9db9;
+  padding: 0 4px;
+  background: #ffffff;
+}
+
+.xp-iex-go-btn {
+  height: 20px;
+  padding: 0 0px;
+  border: none;
+  background: none;
+  font-size: 11px;
+  cursor: pointer;
+}
+.xp-iex-go-btn img {
+  width: 16px;
+  height: 16px;
+}
+
+.xp-iex-search-box {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.xp-iex-search-input {
+  width: 130px;
+  height: 20px;
+  font-size: 11px;
+  border: 1px solid #7f9db9;
+  padding: 0 4px;
+  background: #ffffff;
+}
+
+.xp-iex-search-btn {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #7f9db9;
+  background: #f3f3f3;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* Tabs */
+
+.xp-iex-menu-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f3f1e4  !important;
+    padding: 2px 4px;
+    /* border-left: 1px solid #ffffff; */
+    /* border-right: 1px solid #b3b1a6; */
+    border-top: 1px solid #b3b1a6;
+}
+
+
+.xp-iex-tab-row {
+    /* anchor-name: none; */
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    padding: 0px 0px;
+    background: none;
+    /* border-left: 1px solid #ffffff; */
+    /* border-right: 1px solid #b3b1a6; */
+    /* border-bottom: 1px solid #b3b1a6; */
+    z-index: 2;
+    margin-bottom: -1px;
+}
+
+.xp-browser-tab.active {
+    background: #ffffff;
+    /* border-top-color: #ffffff; */
+    /* border-left-color: #ffffff; */
+    /* border-right-color: #b3b1a6; */
+    border-top: orange 2px solid !important;
+    border-bottom: 1px solid #b3b1a600;
+    border-radius: 3px 3px 0px 0px;
+}
+
+.xp-browser-tab {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 20%;
+    padding: 3px 8px;
+    font-size: 11px;
+    border: 1px solid #b3b1a6;
+    border-bottom: 1px solid #b3b1a6;
+    background: #f3f1e4 !important;
+    cursor: pointer;
+    border-top: #b3b1a6a1 2px solid !important;
+    border-radius: 3px 3px 0px 0px;
+}
+
+.xp-browser-tab img {
+  width: 16px;
+  height: 16px;
+}
+
+.xp-browser-tab span {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* .xp-browser-tab.active {
+  background: #ffffff;
+  border-top-color: #ffffff;
+  border-left-color: #ffffff;
+  border-right-color: #b3b1a6;
+} */
+
+.xp-iex-tab-close {
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Menü + Toolbar */
+
+.xp-iex-menu-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ece9d8;
+    /* padding: 2px 4px; */
+    /* border-left: 1px solid #ffffff; */
+    /* border-right: 1px solid #b3b1a6; */
+    /* border-bottom: 1px solid #b3b1a6; */
+}
+.xp-iex-menu-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f3f1e4 !important;
+    padding: 2px 4px;
+    /* border-left: 1px solid #ffffff; */
+    /* border-right: 1px solid #b3b1a6; */
+    border-top: 1px solid #b3b1a6;
+        border-bottom: 1px solid #0000007b;
+
+  /*   box-shadow: #00000054 0px -4px 4px -3px inset;
+        box-shadow: #00000054 0px 4px -4px 3px ;
+ */
+    /* margin-bottom: 0px; */
+    z-index: 1;
+}
+
+.xp-iex-menu button {
+  border: none;
+  background: transparent;
+  font-size: 11px;
+  padding: 0 6px 0 0;
+  cursor: default;
+}
+
+.xp-iex-menu button:hover {
+  background: #0a246a;
+  color: #ffffff;
+}
+
+.xp-iex-toolbar-icons {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.xp-iex-toolbar-icons button {
+  width: 24px;
+  height: 24px;
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.xp-iex-toolbar-icons button img {
+  width: 16px;
+  height: 16px;
+}
+
+.xp-iex-toolbar-icons button:hover {
+  border-color: #7f9db9;
+  background: #f3f3f3;
+}
+
+/* Inhalt / Iframe */
+
+.xp-iex-content {
+  flex: 1;
+  border: none;
+/*   border-top-color: #ffffff;
+  border-left-color: #ffffff; */
+  background: white;
+  
+}
+
+.xp-iex-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  
+}
+
+
+
+
 
 
