@@ -1306,6 +1306,98 @@ if (gridEl && mineCounter && timerEl && faceBtn && difficultySelect && flagModeT
 }
 
 
+// =========================
+// INTERNET EXPLORER – IFRAME LOGIK
+// =========================
+
+const browserIframe   = document.getElementById('xpBrowserFrame');
+const browserAddress  = document.getElementById('xpBrowserAddress');
+const browserGoBtn    = document.getElementById('xpBrowserGo');
+const browserTabs     = Array.from(document.querySelectorAll('.xp-browser-tab'));
+const browserBackBtn  = document.getElementById('xpIexBack');
+const browserFwdBtn   = document.getElementById('xpIexForward');
+
+let browserHistory = [];
+let browserHistoryIndex = -1;
+
+function setBrowserUrl(url, addToHistory = true) {
+  if (!browserIframe) return;
+  if (!/^https?:\/\//i.test(url)) {
+    url = 'https://' + url;
+  }
+
+  browserIframe.src = url;
+  if (browserAddress) browserAddress.value = url;
+
+  if (addToHistory) {
+    // alles nach aktuellem Index abschneiden
+    browserHistory = browserHistory.slice(0, browserHistoryIndex + 1);
+    browserHistory.push(url);
+    browserHistoryIndex = browserHistory.length - 1;
+  }
+}
+
+function setActiveTab(tab) {
+  browserTabs.forEach(t => t.classList.remove('active'));
+  if (tab) tab.classList.add('active');
+}
+
+browserTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const url = tab.dataset.url;
+    if (!url) return;
+    setActiveTab(tab);
+    setBrowserUrl(url, true);
+  });
+});
+
+if (browserGoBtn && browserAddress) {
+  browserGoBtn.addEventListener('click', () => {
+    const url = browserAddress.value.trim();
+    if (url) setBrowserUrl(url, true);
+  });
+
+  browserAddress.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const url = browserAddress.value.trim();
+      if (url) setBrowserUrl(url, true);
+    }
+  });
+}
+
+if (browserBackBtn) {
+  browserBackBtn.addEventListener('click', () => {
+    if (browserHistoryIndex > 0) {
+      browserHistoryIndex--;
+      const url = browserHistory[browserHistoryIndex];
+      setBrowserUrl(url, false);
+    }
+  });
+}
+
+if (browserFwdBtn) {
+  browserFwdBtn.addEventListener('click', () => {
+    if (browserHistoryIndex < browserHistory.length - 1) {
+      browserHistoryIndex++;
+      const url = browserHistory[browserHistoryIndex];
+      setBrowserUrl(url, false);
+    }
+  });
+}
+
+// Initial: erste aktive Tab-URL in History
+window.addEventListener('DOMContentLoaded', () => {
+  const activeTab = document.querySelector('.xp-browser-tab.active') || browserTabs[0];
+  if (activeTab) {
+    const url = activeTab.dataset.url;
+    if (url) {
+      setBrowserUrl(url, true);
+    }
+  }
+});
+
+
 
 
 
