@@ -65,10 +65,17 @@
   </button>
 
   <!-- Desktop Icon: Paint -->
+  <!-- Desktop Icon: Paint -->
   <button class="xp-icon" data-window="paintWindow">
-    <img src="/img/icons/paint.png" alt="Paint Icon">
-    <span>Paint</span>
+    <span class="xp-icon-image xp-icon-paint"></span>
+    <span class="xp-icon-label">Paint</span>
   </button>
+
+  <button class="xp-icon" data-window="minesweeperWindow">
+    <span class="xp-icon-image xp-icon-minesweeper"></span>
+    <span class="xp-icon-label">Minesweeper</span>
+  </button>
+  
 </div>
 
 <!-- XP Window: Paint -->
@@ -294,6 +301,70 @@
   <div class="xp-window-resize" aria-hidden="true"></div>
 </section>
 
+
+
+<!-- Fenster: minesweeper - -->
+<section id="minesweeperWindow"
+  class="xp-window xp-minesweeper-window"
+  data-title="Minesweeper"
+  data-icon="/img/icons/winmine.exe_14_100-5.png"
+  aria-hidden="true">
+
+  <header class="xp-window-header">
+    <img class="xp-window-icon" alt="">
+    <span class="xp-window-title">Minesweeper</span>
+    <div class="xp-window-buttons">
+      <button class="btn-min"></button>
+      <button class="btn-max"></button>
+      <button class="btn-close"></button>
+    </div>
+  </header>
+
+  <div class="xp-window-body xp-minesweeper-body">
+
+    <div class="msw-menu-bar">
+      <button>Spiel</button>
+      <button>Fenster</button>
+      <button>Hilfe</button>
+    </div>
+
+    <div class="msw-frame">
+      <div class="msw-top">
+        <div class="msw-counter" id="mswMinesCount">010</div>
+
+        <button class="msw-face" id="mswFace" data-state="normal"></button>
+
+        <div class="msw-counter" id="mswTimer">000</div>
+      </div>
+
+      <div class="msw-grid-wrapper">
+        <div class="msw-grid" id="mswGrid"></div>
+      </div>
+    </div>
+
+    <div class="msw-controls">
+      <label>
+        Schwierigkeit:
+        <select id="mswDifficulty">
+          <option value="beginner">Anfänger (9×9, 10)</option>
+          <option value="intermediate">Fortgeschritten (16×16, 40)</option>
+          <option value="expert">Experte (30×16, 99)</option>
+        </select>
+      </label>
+
+      <label class="msw-flag-mode">
+        <input type="checkbox" id="mswFlagMode">
+        Flaggen-Modus (Touch)
+      </label>
+    </div>
+
+  </div>
+</section>
+
+  
+
+
+  
 <!-- Fenster: CV -->
 <section id="win-cv"
          class="xp-window"
