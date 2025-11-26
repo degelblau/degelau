@@ -192,6 +192,10 @@ body.xp-desktop {
   background-image: url("../img/icons/winmine.exe_14_100-5.png");  /* Minesweeper */
 }
 
+.xp-icon-ie {
+  background-image: url("../img/icons/iexplore.exe_14_32528-6.png");  /* Internet Explorer */
+}
+
 
 
 /* Startmenü Icons */
