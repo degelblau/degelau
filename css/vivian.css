@@ -2751,3 +2751,214 @@ color: #979797 !important;
   width: 60ch;
 }
 
+
+
+
+
+/* =========================
+   MINESWEEPER – XP STYLE
+   ========================= */
+
+.xp-minesweeper-window {
+  width: 380px;
+  height: auto !important;
+  min-width: 300px;
+  min-height: auto !important;
+}
+
+.xp-minesweeper-body {
+  background: #ECE9D8;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: Tahoma, Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Menüzeile oben */
+
+.msw-menu-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.msw-menu-bar button {
+  background: transparent;
+  border: none;
+  font-size: 11px;
+  padding: 2px 6px;
+  cursor: default;
+}
+
+.msw-menu-bar button:hover {
+  background: #0a246a;
+  color: white;
+}
+
+/* Rahmen um Zähler + Grid */
+
+.msw-frame {
+  flex: 1;
+  background: #c0c0c0;
+  padding: 5px;
+  border: 2px solid #808080;
+  border-top-color: white;
+  border-left-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-sizing: border-box;
+}
+
+/* Topbar: Minenzähler – Smiley – Timer */
+
+.msw-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px;
+  border: 2px solid #808080;
+  border-top-color: white;
+  border-left-color: white;
+  box-sizing: border-box;
+}
+
+.msw-counter {
+  background: black;
+  color: red;
+  font-family: "Courier New", monospace;
+  padding: 3px 5px;
+  width: 45px;
+  text-align: right;
+  box-sizing: border-box;
+}
+
+/* Smiley */
+
+.msw-face {
+  width: 28px;
+  height: 28px;
+  border: 2px solid #808080;
+  border-top-color: white;
+  border-left-color: white;
+  background: #c0c0c0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.msw-face::before { content:"😊"; }
+.msw-face[data-state="pressed"]::before { content:"😮"; }
+.msw-face[data-state="dead"]::before    { content:"😵"; }
+.msw-face[data-state="win"]::before     { content:"😎"; }
+
+/* Spielfeldrahmen */
+
+.msw-grid-wrapper {
+  flex: 1;
+  border: 2px solid #808080;
+  border-top-color: white;
+  border-left-color: white;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.msw-grid {
+  display: grid;
+  width: 100%;
+  height: 100%;
+}
+
+/* Zellen – feste Größe, Border bleibt immer 2px */
+
+.msw-cell {
+  box-sizing: border-box;
+  width: 100%;
+  aspect-ratio: 1 / 1;              /* macht alle Felder quadratisch */
+  border: 2px solid #808080;
+  border-top-color: white;
+  border-left-color: white;
+  background: #c0c0c0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* aufgedeckte Zellen – gleiche Borderbreite, nur andere Farben */
+
+.msw-cell.msw-revealed {
+  border: 2px solid #808080;
+  border-top-color: #d6d6d6;
+  border-left-color: #d6d6d6;
+  background: #d6d6d6;
+  cursor: default;
+}
+
+/* Zahlenfarben */
+
+.msw-cell.msw-num-1 { color: #0000ff; }
+.msw-cell.msw-num-2 { color: #008000; }
+.msw-cell.msw-num-3 { color: #ff0000; }
+.msw-cell.msw-num-4 { color: #000080; }
+.msw-cell.msw-num-5 { color: #800000; }
+.msw-cell.msw-num-6 { color: #008080; }
+.msw-cell.msw-num-7 { color: #000000; }
+.msw-cell.msw-num-8 { color: #808080; }
+
+/* Flaggen und Minen – als ::before, damit die Zelle nicht größer wird */
+
+.msw-cell.msw-flagged::before {
+  content: "🚩";
+  font-size: 16px;
+}
+
+.msw-cell.msw-mine::before {
+  content: "💣";
+  font-size: 16px;
+}
+
+/* getroffene Mine */
+
+.msw-cell.msw-mine-hit {
+  background: red;
+}
+
+/* Steuerleiste unten */
+
+.msw-controls {
+  font-size: 11px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.msw-controls label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.msw-controls select,
+.msw-controls input {
+  font-size: 11px;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+
+
+
+
+
+
