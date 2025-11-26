@@ -925,6 +925,391 @@ if (contactForm) {
 
 
 // =========================
+// XP MINESWEEPER – GAME LOGIC
+// =========================
+
+const gridEl           = document.getElementById("mswGrid");
+const mineCounter      = document.getElementById("mswMinesCount");
+const timerEl          = document.getElementById("mswTimer");
+const faceBtn          = document.getElementById("mswFace");
+const difficultySelect = document.getElementById("mswDifficulty");
+const flagModeToggle   = document.getElementById("mswFlagMode");
+
+// Falls das Fenster nicht existiert (z. B. auf anderen Seiten) – nichts tun
+if (gridEl && mineCounter && timerEl && faceBtn && difficultySelect && flagModeToggle) {
+
+  let rows = 9;
+  let cols = 9;
+  let mineAmount = 10;
+
+  let grid = [];
+  let gameOver = false;
+  let timer = 0;
+  let timerInterval = null;
+  let firstClick = true;
+  let flagsPlaced = 0;
+
+  // =========================
+  // FACE HELPER
+  // =========================
+
+  function setFace(state) {
+    // state: "normal" | "pressed" | "dead" | "win"
+    faceBtn.dataset.state = state || "normal";
+  }
+
+  // =========================
+  // DIFFICULTY + WINDOW SIZE
+  // =========================
+
+  function resizeMinesweeperWindow() {
+    const win = document.getElementById("minesweeperWindow");
+    if (!win) return;
+
+    if (rows === 9 && cols === 9) {
+      win.style.width = "260px";
+      win.style.height = "340px";
+    } else if (rows === 16 && cols === 16) {
+      win.style.width = "420px";
+      win.style.height = "460px";
+    } else if (rows === 16 && cols === 30) {
+      win.style.width = "650px";
+      win.style.height = "460px";
+    }
+  }
+
+  function applyDifficulty() {
+    const value = difficultySelect.value;
+
+    if (value === "beginner") {
+      rows = 9;
+      cols = 9;
+      mineAmount = 10;
+    } else if (value === "intermediate") {
+      rows = 16;
+      cols = 16;
+      mineAmount = 40;
+    } else if (value === "expert") {
+      rows = 16;
+      cols = 30;
+      mineAmount = 99;
+    }
+
+    startGame();
+  }
+
+  difficultySelect.addEventListener("change", applyDifficulty);
+
+  // =========================
+  // GAME INIT
+  // =========================
+
+  function startGame() {
+    grid = [];
+    gameOver = false;
+    firstClick = true;
+    flagsPlaced = 0;
+
+    clearInterval(timerInterval);
+    timer = 0;
+    timerEl.textContent = "000";
+    mineCounter.textContent = mineAmount.toString().padStart(3, "0");
+
+    setFace("normal");
+    createEmptyGrid();
+    renderGrid();
+    resizeMinesweeperWindow();
+  }
+
+  function createEmptyGrid() {
+    for (let y = 0; y < rows; y++) {
+      grid[y] = [];
+      for (let x = 0; x < cols; x++) {
+        grid[y][x] = {
+          mine: false,
+          revealed: false,
+          flagged: false,
+          number: 0
+        };
+      }
+    }
+  }
+
+  // =========================
+  // PLACE MINES AFTER FIRST CLICK
+  // =========================
+
+  function placeMines(exceptX, exceptY) {
+    let placed = 0;
+
+    while (placed < mineAmount) {
+      const x = Math.floor(Math.random() * cols);
+      const y = Math.floor(Math.random() * rows);
+
+      if ((x === exceptX && y === exceptY) || grid[y][x].mine) continue;
+
+      grid[y][x].mine = true;
+      placed++;
+    }
+
+    calculateNumbers();
+  }
+
+  // =========================
+  // NUMBER CALCULATION
+  // =========================
+
+  function calculateNumbers() {
+    const dirs = [-1, 0, 1];
+
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        if (grid[y][x].mine) continue;
+
+        let count = 0;
+
+        dirs.forEach(dy => {
+          dirs.forEach(dx => {
+            if (dx === 0 && dy === 0) return;
+            const ny = y + dy;
+            const nx = x + dx;
+
+            if (ny >= 0 && ny < rows && nx >= 0 && nx < cols && grid[ny][nx].mine) {
+              count++;
+            }
+          });
+        });
+
+        grid[y][x].number = count;
+      }
+    }
+  }
+
+  // =========================
+  // RENDER GRID
+  // =========================
+
+  function renderGrid() {
+    gridEl.innerHTML = "";
+    gridEl.style.display = "grid";
+    gridEl.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    gridEl.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const cell = document.createElement("div");
+        cell.className = "msw-cell";
+        cell.dataset.x = x;
+        cell.dataset.y = y;
+
+        cell.addEventListener("click", () => handleLeftClick(x, y));
+
+        cell.addEventListener("contextmenu", (e) => {
+          e.preventDefault();
+          toggleFlag(x, y);
+        });
+
+        cell.addEventListener("touchend", (e) => {
+          e.preventDefault();
+          if (flagModeToggle.checked) {
+            toggleFlag(x, y);
+          } else {
+            handleLeftClick(x, y);
+          }
+        });
+
+        cell.addEventListener("mousedown", () => {
+          if (!gameOver && !firstClick) setFace("pressed");
+        });
+
+        cell.addEventListener("mouseup", () => {
+          if (!gameOver && !firstClick) setFace("normal");
+        });
+
+        gridEl.appendChild(cell);
+      }
+    }
+  }
+
+  // =========================
+  // LEFT CLICK
+  // =========================
+
+  function handleLeftClick(x, y) {
+    if (gameOver) return;
+    const cell = grid[y][x];
+
+    if (cell.flagged || cell.revealed) return;
+
+    if (firstClick) {
+      placeMines(x, y);
+      startTimer();
+      firstClick = false;
+    }
+
+    if (cell.mine) {
+      revealAllMines(x, y);
+      gameOver = true;
+      setFace("dead");
+      return;
+    }
+
+    revealCell(x, y);
+    checkWin();
+  }
+
+  // =========================
+  // FLAG
+  // =========================
+
+  function toggleFlag(x, y) {
+    if (gameOver) return;
+
+    const cell = grid[y][x];
+    const el = getCellElement(x, y);
+
+    if (cell.revealed) return;
+
+    cell.flagged = !cell.flagged;
+
+    if (cell.flagged) {
+      el.classList.add("msw-flagged");
+      flagsPlaced++;
+    } else {
+      el.classList.remove("msw-flagged");
+      flagsPlaced--;
+    }
+
+    updateMineCounter();
+  }
+
+  function updateMineCounter() {
+    const remaining = mineAmount - flagsPlaced;
+    mineCounter.textContent = remaining.toString().padStart(3, "0");
+  }
+
+  // =========================
+  // REVEAL CELL
+  // =========================
+
+  function revealCell(x, y) {
+    const cell = grid[y][x];
+    const el = getCellElement(x, y);
+
+    if (cell.revealed || cell.flagged) return;
+
+    cell.revealed = true;
+    el.classList.add("msw-revealed");
+
+    if (cell.mine) {
+      el.classList.add("msw-mine");
+      return;
+    }
+
+    const n = cell.number;
+
+    if (n > 0) {
+      el.textContent = n;
+      el.classList.add(`msw-num-${n}`);
+    } else {
+      revealSurrounding(x, y);
+    }
+  }
+
+  // =========================
+  // FLOOD FILL
+  // =========================
+
+  function revealSurrounding(x, y) {
+    const dirs = [-1, 0, 1];
+
+    dirs.forEach(dy => {
+      dirs.forEach(dx => {
+        if (dx === 0 && dy === 0) return;
+        const nx = x + dx;
+        const ny = y + dy;
+
+        if (nx < 0 || ny < 0 || nx >= cols || ny >= rows) return;
+
+        if (!grid[ny][nx].revealed && !grid[ny][nx].mine) {
+          revealCell(nx, ny);
+        }
+      });
+    });
+  }
+
+  // =========================
+  // GAME OVER
+  // =========================
+
+  function revealAllMines(hitX, hitY) {
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        if (grid[y][x].mine) {
+          const el = getCellElement(x, y);
+          el.classList.add("msw-mine");
+          if (x === hitX && y === hitY) {
+            el.classList.add("msw-mine-hit");
+          }
+        }
+      }
+    }
+    clearInterval(timerInterval);
+  }
+
+  // =========================
+  // CHECK WIN
+  // =========================
+
+  function checkWin() {
+    let revealedCount = 0;
+
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        if (grid[y][x].revealed) revealedCount++;
+      }
+    }
+
+    if (revealedCount === rows * cols - mineAmount) {
+      gameOver = true;
+      setFace("win");
+      clearInterval(timerInterval);
+    }
+  }
+
+  // =========================
+  // TIMER
+  // =========================
+
+  function startTimer() {
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+      timer = Math.min(timer + 1, 999);
+      timerEl.textContent = timer.toString().padStart(3, "0");
+    }, 1000);
+  }
+
+  // =========================
+  // HELPERS
+  // =========================
+
+  function getCellElement(x, y) {
+    return gridEl.querySelector(`.msw-cell[data-x="${x}"][data-y="${y}"]`);
+  }
+
+  faceBtn.addEventListener("click", () => {
+    startGame();
+  });
+
+  // erstes Spiel
+  startGame();
+}
+
+
+
+
+
+// =========================
 // RECHTSKLICK & DEVTOOLS BLOCKEN
 // =========================
 
