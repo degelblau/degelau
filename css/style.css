@@ -209,3 +209,48 @@ width:75px;
 
 
 
+.classic-left{
+  justify-self: center;          /* Spalte selbst zentrieren */
+  display: flex;
+  flex-direction: column;
+  align-items: center;           /* Inhalt (Logo + Text) mittig */
+}
+
+.xp-logo-left{
+  width: clamp(260px,28vw,420px);
+  height: auto;
+  display: block;
+  margin: 0 auto 12px;           /* Logo mittig */
+}
+
+
+/* alles, was zum „eigentlichen“ Layout gehört */
+.xp-shell{
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+/* wenn sichtbar */
+.xp-shell.visible{
+  opacity: 1;
+}
+
+/* Bootscreen */
+.boot{
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:#000;
+  color:#fff;
+  z-index:9999;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+.boot.fade-out{
+  opacity: 0;
+  pointer-events: none;
+}
+
+
