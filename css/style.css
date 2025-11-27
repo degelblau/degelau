@@ -182,12 +182,29 @@ width:75px;
   line-height: 1.0;
 }
 /* responsive */
+/* responsive */
 @media (max-width:960px){
   .xp-footer-inner{grid-template-columns:1fr}
   .xp-classic-grid{grid-template-columns:1fr;gap:20px}
   .classic-divider{display:none}
-  .classic-left{justify-self:center;text-align:center}
+  .classic-left{
+    justify-self:center;
+    text-align:center
+  }
   .classic-users{justify-self:center;width:min(680px,100%)}
+
+    .xp-logo-left {
+        justify-content: center;
+        width: 100%;
+    
+}
+    .xp-classic-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+.xp-header-top {
+  height: 90px;
 }
 
 
