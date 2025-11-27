@@ -30,7 +30,34 @@ window.addEventListener('load', () => {
 });
 
 
+function showLogin() {
+  if (!boot) return;
 
+  // Bootscreen ausblenden
+  boot.classList.add('fade-out');
+
+  const shellParts = [loginHeader, loginMain, loginFooter];
+
+  // Shell erstmal einblenden, aber noch mit opacity 0
+  shellParts.forEach(el => {
+    if (!el) return;
+    el.hidden = false;
+    el.classList.remove('visible');
+  });
+
+  // Nächster Frame → visible-Klasse setzen -> weicher Fade-in
+  requestAnimationFrame(() => {
+    shellParts.forEach(el => {
+      if (!el) return;
+      el.classList.add('visible');
+    });
+  });
+
+  // Boot-Element nach der Animation komplett entfernen
+  setTimeout(() => {
+    boot.style.display = 'none';
+  }, 700); // passt zu transition: 0.6s
+}
 
 window.addEventListener('contextmenu', e => {
   e.preventDefault();
